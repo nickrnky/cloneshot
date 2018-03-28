@@ -177,5 +177,11 @@ public class PlayerCharacter : MonoBehaviour {
 
     //    Destroy(sphere);
     //}
+
+    internal PlayersActionsInRound GetPlayerActions()
+    {
+        return ActionsInRound;
+    }
+
     #endregion Private Methods
 }

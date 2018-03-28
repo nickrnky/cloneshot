@@ -52,17 +52,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BackgroundMusicPlayer.cs" />
-     <Compile Include="Assets\Scripts\EnemyCounter.cs" />
-     <Compile Include="Assets\Scripts\Fireball.cs" />
-     <Compile Include="Assets\Scripts\FlyingCameraMovement.cs" />
+     <Compile Include="Assets\Scripts\CloneMovement.cs" />
      <Compile Include="Assets\Scripts\FPSInput.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\PistolShot.cs" />
      <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
      <Compile Include="Assets\Scripts\RayShooter.cs" />
-     <Compile Include="Assets\Scripts\ReactiveTarget.cs" />
-     <Compile Include="Assets\Scripts\SceneController.cs" />
-     <Compile Include="Assets\Scripts\WanderingAI.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

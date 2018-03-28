@@ -10,6 +10,14 @@ public class PlayerCharacter : MonoBehaviour {
     #region Properties
 
     /// <summary>
+    /// The attached camera
+    /// </summary>
+    private Camera _camera;
+
+    [SerializeField]
+    private GameObject bulletPrefab;
+
+    /// <summary>
     /// Represents the current health of the player
     /// </summary>
     private int CurrentHealth { get; set; }
@@ -33,6 +41,11 @@ public class PlayerCharacter : MonoBehaviour {
     /// Represents what frame is currently being run.
     /// </summary>
     private int CurrentFrameNumber = 0;
+
+    /// <summary>
+    /// Sound thats played when the weapon is fired.
+    /// </summary>
+    public AudioSource FireSound;
 
     /// <summary>
     /// Is set to true if the player is dead.
@@ -79,6 +92,12 @@ public class PlayerCharacter : MonoBehaviour {
         PreviousRotation = new Quaternion();
         PreviousMovement = transform.position;
         PreviousRotation = transform.rotation;
+
+
+        _camera = GetComponent<Camera>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     /// <summary>
@@ -100,8 +119,19 @@ public class PlayerCharacter : MonoBehaviour {
             PreviousRotation = transform.rotation;
             ActionsInRound.AddAction(new PlayerTurnAction(PreviousRotation, CurrentFrameNumber));
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (FireSound != null)
+            {
+                FireSound.Play();
+            }
 
-        if(CurrentFrameNumber == 200)
+            Shoot();
+
+            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber));
+        }
+
+        if (CurrentFrameNumber == 200)
         {
             CloneController.SetActionReader(ActionsInRound);
         }
@@ -131,5 +161,21 @@ public class PlayerCharacter : MonoBehaviour {
         PlayerMovement.AllowMovement = false;
     }
 
+    public void Shoot()
+    {
+        GameObject _gunshot = Instantiate(bulletPrefab) as GameObject;
+        _gunshot.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
+        _gunshot.transform.rotation = transform.rotation;
+    }
+
+    //private IEnumerator SphereIndicator(Vector3 pos)
+    //{
+    //    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    //    sphere.transform.position = pos;
+
+    //    yield return new WaitForSeconds(1);
+
+    //    Destroy(sphere);
+    //}
     #endregion Private Methods
 }

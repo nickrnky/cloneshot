@@ -27,6 +27,10 @@ namespace Assets.Scripts.Recording
         public List<PlayerAction> GetPlayerActionsForNextFrame()
         {
             FrameNumber++;
+            if(Actions == null || !Actions.Any() || Actions.Count <= CurrentIndex)
+            {
+                return null;
+            }
 
             if(Actions[CurrentIndex].FrameNumber != FrameNumber)
             {

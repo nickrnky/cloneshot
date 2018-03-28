@@ -8,7 +8,7 @@ namespace Assets.Scripts.Recording.PlayerActions
 {
     internal abstract class PlayerAction
     {
-        public enum PlayerActions {Movement, Turn, JumpStart, JumpEnd, Fire  }
+        public enum PlayerActions {Movement, Turn, JumpStart, JumpEnd, Shoot  }
 
         public PlayerActions ActionType { get; set; }
 

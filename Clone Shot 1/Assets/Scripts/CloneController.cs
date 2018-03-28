@@ -32,13 +32,16 @@ public class CloneController : MonoBehaviour
     {
         CurrentFrameNumber++;
 
-        CurrentRoundActions = Actions.GetPlayerActionsForNextFrame();
-
-        if(CurrentRoundActions != null)
+        if (Actions != null)
         {
-            foreach(PlayerAction action in CurrentRoundActions)
+            CurrentRoundActions = Actions.GetPlayerActionsForNextFrame();
+
+            if (CurrentRoundActions != null)
             {
-                action.PerformActionOnObject(gameObject);
+                foreach (PlayerAction action in CurrentRoundActions)
+                {
+                    action.PerformActionOnObject(gameObject);
+                }
             }
         }
     }

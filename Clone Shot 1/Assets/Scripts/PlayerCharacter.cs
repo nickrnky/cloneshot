@@ -1,48 +1,119 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using Assets.Scripts.Recording;
+using Assets.Scripts.Recording.PlayerActions;
 
 public class PlayerCharacter : MonoBehaviour {
 
-	private int CurrentHealth;
-    public int MaxHealth = 100;
-    public Text HealthBar;
-    public Image damageImage;
-    public AudioSource DeathSound;
-    public AudioSource DamageSound;
+    #region Properties
 
+    /// <summary>
+    /// Represents the current health of the player
+    /// </summary>
+    private int CurrentHealth { get; set; }
+
+    /// <summary>
+    /// Is set to true if the character was damaged, set to false when the damage has been processed.
+    /// </summary>
+    private bool Damaged { get; set; }
+
+    /// <summary>
+    /// Represents the color that the screen should flash when the character is damaged
+    /// </summary>
+    public Color DamageFlashColour { get; set; }
+
+    /// <summary>
+    /// Represents the speed at which the screen should flash the damage color when damaged
+    /// </summary>
+    public float DamageFlashSpeed = 5f;
+
+    /// <summary>
+    /// Represents what frame is currently being run.
+    /// </summary>
+    private int CurrentFrameNumber = 0;
+
+    /// <summary>
+    /// Is set to true if the player is dead.
+    /// </summary>
+    private bool IsDead { get; set; }
+
+    /// <summary>
+    /// Represents the maximum health the player can have.
+    /// </summary>
+    public int MaxHealth = 100;
+
+    /// <summary>
+    /// Object used to record all of the players action in a round.
+    /// </summary>
+    private PlayersActionsInRound ActionsInRound;
+
+    /// <summary>
+    /// The script being used to handle the players movement.
+    /// </summary>
     public FPSInput PlayerMovement;
 
-    private bool Damaged = false;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-    public float flashSpeed = 5f;                             
+    private Vector3 PreviousMovement;
+    private Quaternion PreviousRotation;
 
-    private bool IsDead = false;
 
+
+    #endregion Properties
+    
+    #region Unity Events
+
+    /// <summary>
+    /// Function that runs at the start of the scene
+    /// </summary>
     void Start()
     {
+        IsDead = false;
+        ActionsInRound = new PlayersActionsInRound();
+        Damaged = false;
 		CurrentHealth = 100;
+        DamageFlashColour = new Color(1f, 0f, 0f, 0.1f);
         PlayerMovement = GetComponentInParent<FPSInput>();
+
+        PreviousMovement = new Vector3();
+        PreviousRotation = new Quaternion();
+        PreviousMovement = transform.position;
+        PreviousRotation = transform.rotation;
     }
+
+    /// <summary>
+    /// Function that runs after every frame.
+    /// </summary>
     void Update()
     {
-        if (Damaged)
+        CurrentFrameNumber++;
+        Damaged = false;
+
+        if(PreviousMovement != transform.position)
         {
-            damageImage.color = flashColour;
-        }
-        else
-        {
-            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            PreviousMovement = transform.position;
+            ActionsInRound.AddAction(new PlayerMovementAction(PreviousMovement, CurrentFrameNumber));
         }
         
-        Damaged = false;
+        if(PreviousRotation != transform.rotation)
+        {
+            PreviousRotation = transform.rotation;
+            ActionsInRound.AddAction(new PlayerTurnAction(PreviousRotation, CurrentFrameNumber));
+        }
+
+        if(CurrentFrameNumber == 200)
+        {
+            CloneController.SetActionReader(ActionsInRound);
+        }
     }
+
+    #endregion Unity Events
+
+    #region Private Methods
 
     public void Hurt(int damage)
     {
 		CurrentHealth -= damage;
-
-        HealthBar.text = "Health: " + CurrentHealth;
 
         Damaged = true;
         
@@ -53,20 +124,12 @@ public class PlayerCharacter : MonoBehaviour {
                 Die();
             }
         }
-        else
-        {
-            DamageSound.Play();
-        }
 	}
 
     private void Die()
     {
         PlayerMovement.AllowMovement = false;
-        damageImage.color = flashColour;
-
-        if(DeathSound != null)
-        {
-            DeathSound.Play();
-        }
     }
+
+    #endregion Private Methods
 }

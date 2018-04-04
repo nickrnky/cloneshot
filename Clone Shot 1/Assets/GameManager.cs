@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GameManager : NetworkBehaviour {
+public class GameManager : MonoBehaviour {
 
     // Management variables
     private bool RoundInProgress = false;
     private int CurrentRound = 0;
     private List<GameObject> TeamOneClones;
     private List<GameObject> TeamTwoClones;
-    private GameObject PlayerOne;
-    private GameObject PlayerTwo;
+    private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    private const string PLAYER_ID_PREFIX = "Player ";
+    //private GameObject PlayerOne;
+    //private GameObject PlayerTwo;
 
     // Configurable variables
     public int NumberOfRounds = 5;
@@ -25,13 +27,15 @@ public class GameManager : NetworkBehaviour {
     // Use this for initialization
     void Start () {
 
+        /*
         if (!isServer)
         {
             return;
         }
+        */
         RoundInProgress = false;
-        PlayerOne = new GameObject();
-        PlayerTwo = new GameObject();
+        //PlayerOne = new GameObject();
+        //PlayerTwo = new GameObject();
 
     }
 	
@@ -39,10 +43,12 @@ public class GameManager : NetworkBehaviour {
 	void Update () {
 		
         // Check server
+        /*
         if (!isServer)
         {
             return;
         }
+        */
 
         // Wait for players
         if(Network.connections.Length < 2)
@@ -59,6 +65,42 @@ public class GameManager : NetworkBehaviour {
         }
 
 	}
+
+    // Registers the player
+    public static void RegisterPlayer(string _netID, Player _player)
+    {
+
+        string _playerID = PLAYER_ID_PREFIX + _netID;
+        players.Add(_playerID, _player);
+        _player.transform.name = _playerID;
+
+    }
+
+    public static void UuRegisterPlayer(string _playerID)
+    {
+        players.Remove(_playerID);
+    }
+    
+    public static Player GetPlayer (string _playerID)
+    {
+        return players[_playerID];
+    }
+
+    private void OnGUI()
+    {
+        GUILayout.BeginArea(new Rect(200, 200, 200, 500));
+        GUILayout.BeginVertical();
+
+        foreach(string _playerID in players.Keys)
+        {
+
+            GUILayout.Label(_playerID + "  -   " + players[_playerID].transform.name);
+
+        }
+
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
+    }
 
     // Start a round
     IEnumerator StartRound()

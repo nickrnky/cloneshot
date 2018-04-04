@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 114641412327366280}
   - component: {fileID: 114558441536115678}
   - component: {fileID: 114117456019269826}
+  - component: {fileID: 114192941817234630}
+  - component: {fileID: 114120645034036116}
   m_Layer: 0
   m_Name: Clone Shot Player
   m_TagString: Player
@@ -216,6 +218,33 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114120645034036116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1031238355625210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e876f9d747bd346ba992cee919b55a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 20507821338717056}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &114192941817234630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1031238355625210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea8b156ca5728149b916e0c349dc298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
 --- !u!114 &114211335827727830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   gravity: -9.8
+  AllowMovement: 1
 --- !u!114 &114942128133354784
 MonoBehaviour:
   m_ObjectHideFlags: 1

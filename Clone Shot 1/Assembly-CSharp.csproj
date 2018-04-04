@@ -53,18 +53,19 @@
   <ItemGroup>
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Scripts\BackgroundMusicPlayer.cs" />
+     <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\CloneController.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\FPSInput.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\PlayerSetup.cs" />
-     <Compile Include="Assets\Scripts\CloneShot Scripts\PlayerShoot.cs" />
-     <Compile Include="Assets\Scripts\PistolShot.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerAction.cs" />
+     <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerJumpAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerMovementAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerShootAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerTurnAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayersActionsInRound.cs" />
+     <Compile Include="Assets\Scripts\Shoot.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

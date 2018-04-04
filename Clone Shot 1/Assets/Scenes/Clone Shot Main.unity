@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1031238355625210, guid: cff86de2c5ed55445b0834c7b3db0f88,
+  m_PlayerPrefab: {fileID: 1632085744572838, guid: 2ff4edca8462ff74f8e6d140cc5e65c1,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2bd41f77d9f9924ba6583c53e68b203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClonePrefab: {fileID: 0}
   NumberOfRounds: 5
   Spawn1X: 0
   Spawn1Y: 0

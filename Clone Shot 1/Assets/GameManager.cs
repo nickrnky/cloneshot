@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Recording;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour {
+
+    [SerializeField]
+    public GameObject ClonePrefab;
 
     // Management variables
     private bool RoundInProgress = false;
@@ -72,6 +76,7 @@ public class GameManager : MonoBehaviour {
 
         string _playerID = PLAYER_ID_PREFIX + _netID;
         players.Add(_playerID, _player);
+        _player.SetPlayerID(_playerID);
         _player.transform.name = _playerID;
 
     }
@@ -146,4 +151,102 @@ public class GameManager : MonoBehaviour {
 
         return true;
     }
+
+    #region Clone Functions
+
+    /// <summary>
+    /// Creates a new clone object at the specified starting position, that will use the passed in actions
+    /// </summary>
+    /// <param name="StartingPosition"></param>
+    /// <param name="ActionReader"></param>
+    /// <returns></returns>
+    private GameObject CreateClone(Vector3 StartingPosition, PlayersActionsInRound ActionReader)
+    {
+        if (StartingPosition == null || ActionReader == null)
+        {
+            Debug.Log("Cannot pass in a null starting position or action reader when creating a clone");
+            return null;
+        }
+
+        if (ClonePrefab == null)
+        {
+            Debug.Log("Must set the clone prefab before creating a clone");
+            return null;
+        }
+
+        GameObject Clone = Instantiate(ClonePrefab) as GameObject;
+
+        CloneController Controller = Clone.GetComponent<CloneController>();
+
+        if (Controller == null)
+        {
+            Debug.Log("Cannot create a clone instance using a prefab that doesn't have the clone controller component!");
+            return null;
+        }
+
+        Controller.SetStartingPosition(StartingPosition);
+        Controller.SetActionReader(ActionReader);
+
+        return Clone;
+    }
+
+    /// <summary>
+    /// Resets a clone to its starting position, and sets its actions counter back to frame 0.
+    /// </summary>
+    /// <param name="Clone"></param>
+    private void ResetClone(GameObject Clone)
+    {
+        CloneController controller = Clone.GetComponent<CloneController>();
+
+        if (controller != null)
+        {
+            controller.ResetActions();
+        }
+        else
+        {
+            Debug.Log("Cannot reset clone actions for an object without a CloneController component!");
+            return;
+        }
+    }
+
+    /// <summary>
+    /// Starts a clones action counter. This will make the clone actually start preforming recorded actions.
+    /// </summary>
+    /// <param name="Clone"></param>
+    private void StartClone(GameObject Clone)
+    {
+        CloneController controller = Clone.GetComponent<CloneController>();
+
+        if (controller != null)
+        {
+            controller.StartActions();
+        }
+        else
+        {
+            Debug.Log("Cannot start clone actions for an object without a CloneController component!");
+            return;
+        }
+    }
+
+    /// <summary>
+    /// Stops the clones action counter, so that it will no longer perform actions.
+    /// </summary>
+    /// <param name="Clone"></param>
+    private void StopClone(GameObject Clone)
+    {
+        CloneController controller = Clone.GetComponent<CloneController>();
+
+        if (controller != null)
+        {
+            controller.StopActions();
+        }
+        else
+        {
+            Debug.Log("Cannot stop clone actions for an object without a CloneController component!");
+            return;
+        }
+    }
+
+    #endregion Clone Functions
 }
+

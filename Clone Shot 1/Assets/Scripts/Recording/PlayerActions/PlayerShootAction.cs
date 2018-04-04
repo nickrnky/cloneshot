@@ -6,21 +6,42 @@ using UnityEngine;
 
 namespace Assets.Scripts.Recording.PlayerActions
 {
-    internal class PlayerShootAction: PlayerAction
+    /// <summary>
+    /// Represents a shooting action.
+    /// </summary>
+    internal class PlayerShootAction : PlayerAction
     {
+        #region Constructor
+
+        /// <summary>
+        /// The frame number represents when the action took place
+        /// </summary>
+        /// <param name="frameNumber"></param>
         public PlayerShootAction(int frameNumber)
             : base(frameNumber)
         {
             ActionType = PlayerActions.Shoot;
         }
 
+        #endregion Constructor
+
+        #region Public Functions
+
+        /// <summary>
+        /// Performs a shooting action on the game object.
+        /// </summary>
+        /// <param name="Object"></param>
         public override void PerformActionOnObject(GameObject Object)
         {
-            Player Player = Object.GetComponent<Player>();
-            if(Player != null)
+            Character Player = Object.GetComponent<Character>();
+            if (Player != null)
             {
-                Player.Shoot();
+                Player.CmdShoot();
             }
         }
+
+        #endregion Public Functions
     }
 }
+
+

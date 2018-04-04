@@ -6,31 +6,18 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Assets.Scripts.Recording;
 using Assets.Scripts.Recording.PlayerActions;
+using Assets.Scripts;
 
-public class Player : NetworkBehaviour
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
+public class Player : Character
 {
-
     #region Properties
-
+    
     /// <summary>
-    /// The attached camera
+    /// Object used to record all of the players action in a round.
     /// </summary>
-    private Camera _camera;
-
-    [SerializeField]
-    private GameObject bulletPrefab;
-
-    /// <summary>
-    /// Represents the current health of the player
-    /// </summary>
-    /// 
-    [SyncVar]
-    private int CurrentHealth;
-
-    /// <summary>
-    /// Is set to true if the character was damaged, set to false when the damage has been processed.
-    /// </summary>
-    private bool Damaged { get; set; }
+    private PlayersActionsInRound ActionsInRound;
 
     /// <summary>
     /// Represents the color that the screen should flash when the character is damaged
@@ -43,31 +30,17 @@ public class Player : NetworkBehaviour
     public float DamageFlashSpeed = 5f;
 
     /// <summary>
-    /// Represents what frame is currently being run.
-    /// </summary>
-    private int CurrentFrameNumber = 0;
-
-    /// <summary>
     /// Sound thats played when the weapon is fired.
     /// </summary>
     public AudioSource FireSound;
 
-    /// <summary>
-    /// Is set to true if the player is dead.
-    /// </summary>
-    private bool IsDead { get; set; }
-
-    /// <summary>
-    /// Represents the maximum health the player can have.
-    /// </summary>
-    /// 
     [SerializeField]
-    public int MaxHealth = 100;
+    public float JumpForce = 10;
 
     /// <summary>
-    /// Object used to record all of the players action in a round.
+    /// Represents the server ID of the player
     /// </summary>
-    private PlayersActionsInRound ActionsInRound;
+    private string PlayerID;
 
     /// <summary>
     /// The script being used to handle the players movement.
@@ -88,10 +61,7 @@ public class Player : NetworkBehaviour
     /// </summary>
     void Start()
     {
-        IsDead = false;
         ActionsInRound = new PlayersActionsInRound();
-        Damaged = false;
-        CurrentHealth = 100;
         DamageFlashColour = new Color(1f, 0f, 0f, 0.1f);
         PlayerMovement = GetComponentInParent<FPSInput>();
 
@@ -99,12 +69,6 @@ public class Player : NetworkBehaviour
         PreviousRotation = new Quaternion();
         PreviousMovement = transform.position;
         PreviousRotation = transform.rotation;
-
-
-        _camera = GetComponent<Camera>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     /// <summary>
@@ -133,14 +97,22 @@ public class Player : NetworkBehaviour
                 FireSound.Play();
             }
 
-            Shoot();
+            CmdShoot();
 
             ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber));
         }
 
-        if (CurrentFrameNumber == 200)
+        if(Input.GetKeyDown(KeyCode.Space) && !IsJumping)
         {
-            CloneController.SetActionReader(ActionsInRound);
+            IsJumping = true;
+            Vector3 forceOfJump = transform.up * JumpForce;
+            Jump(forceOfJump);
+            ActionsInRound.AddAction(new PlayerJumpAction(forceOfJump, CurrentFrameNumber));
+
+        }
+        else if(GroundCheck != null)
+        {
+            IsJumping = Physics.Raycast(transform.position, -Vector3.up, DistanceToTheGround + 0.1f);
         }
     }
 
@@ -148,42 +120,28 @@ public class Player : NetworkBehaviour
 
     #region Private Methods
 
-    public void TakeDamage(int damage)
-    {
-        CurrentHealth -= damage;
-
-        Damaged = true;
-
-        if (CurrentHealth <= 0)
-        {
-            if (!IsDead)
-            {
-                Die();
-            }
-        }
-    }
-
-    private void Die()
+    public override void Die()
     {
         PlayerMovement.AllowMovement = false;
     }
 
-    public void Shoot()
+    public string GetPlayerID()
     {
-        GameObject _gunshot = Instantiate(bulletPrefab) as GameObject;
-        _gunshot.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
-        _gunshot.transform.rotation = transform.rotation;
+        return PlayerID;
     }
 
-    //private IEnumerator SphereIndicator(Vector3 pos)
-    //{
-    //    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-    //    sphere.transform.position = pos;
+    public void SetPlayerID(string ID)
+    {
+        if(string.IsNullOrEmpty(PlayerID))
+        {
+            PlayerID = ID;
+        }
+        else
+        {
+            Debug.Log("Cannot set a players ID twice!");
+        }
+    }
 
-    //    yield return new WaitForSeconds(1);
-
-    //    Destroy(sphere);
-    //}
 
     internal PlayersActionsInRound GetPlayerActions()
     {

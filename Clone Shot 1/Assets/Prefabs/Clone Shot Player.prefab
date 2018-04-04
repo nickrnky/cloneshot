@@ -244,7 +244,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea8b156ca5728149b916e0c349dc298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  bulletPrefab: {fileID: 1021156745555878, guid: 18badadbbfcc07944aad50ddf6cfe367,
+    type: 2}
+  DamageFlashSpeed: 5
+  FireSound: {fileID: 0}
+  MaxHealth: 100
+  PlayerMovement: {fileID: 114910093531308716}
 --- !u!114 &114211335827727830
 MonoBehaviour:
   m_ObjectHideFlags: 1

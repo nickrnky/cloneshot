@@ -16,7 +16,7 @@ namespace Assets.Scripts.Recording.PlayerActions
 
         public override void PerformActionOnObject(GameObject Object)
         {
-            PlayerCharacter Player = Object.GetComponent<PlayerCharacter>();
+            Player Player = Object.GetComponent<Player>();
             if(Player != null)
             {
                 Player.Shoot();

@@ -18,18 +18,18 @@ namespace Assets.Scripts
 
         void OnTriggerEnter(Collider other)
         {
-            PlayerCharacter target = other.gameObject.GetComponent<PlayerCharacter>();
+            Player target = other.gameObject.GetComponent<Player>();
             if (target != null)
             {
-                target.Hurt(5);
+                target.TakeDamage(5);
             }
             else
             {
-                target = other.gameObject.GetComponentInParent<PlayerCharacter>();
+                target = other.gameObject.GetComponentInParent<Player>();
                 {
                     if(target != null)
                     {
-                        target.Hurt(5);
+                        target.TakeDamage(5);
                     }
                 }
             }

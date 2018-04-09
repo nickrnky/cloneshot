@@ -21,11 +21,11 @@ public class GameManager : MonoBehaviour {
 
     // Configurable variables
     public int NumberOfRounds = 5;
-    public float Spawn1X = 0;
-    public float Spawn1Y = 0;
+    public float Spawn1X = -5;
+    public float Spawn1Y = 2;
     public float Spawn1Z = 0;
-    public float Spawn2X = 0;
-    public float Spawn2Y = 0;
+    public float Spawn2X = 5;
+    public float Spawn2Y = 2;
     public float Spawn2Z = 0;
 
     // Use this for initialization
@@ -64,7 +64,8 @@ public class GameManager : MonoBehaviour {
         if(CurrentRound < NumberOfRounds && RoundInProgress == false)
         {
             RoundInProgress = true;
-            StartCoroutine(StartRound());
+            Debug.Log("Starting Round");
+            //StartCoroutine(StartRound());
             return;
         }
 
@@ -111,18 +112,73 @@ public class GameManager : MonoBehaviour {
     IEnumerator StartRound()
     {
         // Position players
+        Vector3 PlayerOneStart = new Vector3(Spawn1X, Spawn1Y, Spawn1Z);
+        Vector3 PlayerTwoStart = new Vector3(Spawn2X, Spawn2Y, Spawn2Z);
 
-        //player1 = Network.player;
-
-        // Set to start positions
+        int count = 0;
+        foreach(Player person in players.Values)
+        {
+            if(count % 2 == 0)
+            {
+                person.transform.position = PlayerOneStart;
+            }
+            else
+            {
+                person.transform.position = PlayerTwoStart;
+            }
+        }
 
         // Spawn clones
+        foreach(GameObject x in TeamOneClones)
+        {
+            ResetClone(x);
+        }
+
+        foreach(GameObject x in TeamTwoClones)
+        {
+            ResetClone(x);
+        }
 
         // Start game
+        foreach (GameObject x in TeamOneClones)
+        {
+            StartClone(x);
+        }
+
+        foreach (GameObject x in TeamTwoClones)
+        {
+            StartClone(x);
+        }
 
         // Loop and check for game end
+        count = 0;
+        bool StillFighting = true;
+        while (StillFighting)
+        {
+            foreach(Player y in players.Values)
+            {
+                if(count % 2 == 0 && !TeamAlive(TeamOneClones, y)){
+                    StillFighting = false;
+                }
+                else if (count % 2 == 0 && !TeamAlive(TeamTwoClones, y)){
+                    StillFighting = false;
+                }
+            }
+        }
 
         // Clean up and get recording
+        count = 0;
+        foreach(Player y in players.Values)
+        {
+            if(count % 2 == 0)
+            {
+                TeamOneClones.Add(CreateClone(PlayerOneStart, y.GetPlayerActions()));
+            }
+            else
+            {
+                TeamTwoClones.Add(CreateClone(PlayerTwoStart, y.GetPlayerActions()));
+            }
+        }
 
         // End
         CurrentRound++;
@@ -139,7 +195,7 @@ public class GameManager : MonoBehaviour {
         yield return null;
     }
 
-    private bool TeamAlive(List<GameObject> clones, GameObject player)
+    private bool TeamAlive(List<GameObject> clones, Player player)
     {
         // Check player for life
 

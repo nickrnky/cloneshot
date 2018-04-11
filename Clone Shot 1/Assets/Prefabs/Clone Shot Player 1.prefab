@@ -331,6 +331,7 @@ MonoBehaviour:
   DistanceToTheGround: 0
   GroundCheck: {fileID: 4476823731657246}
   MaxHealth: 100
+  MainCamera: {fileID: 20758185565582952}
   DamageFlashSpeed: 5
   FireSound: {fileID: 0}
   JumpForce: 100

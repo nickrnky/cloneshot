@@ -15,6 +15,10 @@ namespace Assets.Scripts
         public int Damage = 1;
         public int Lifetime = 10;
 
+        public float YRotation = 0;
+
+        private float YSpeed, ZSpeed;
+
         void Start()
         {
             if (!isServer)
@@ -22,11 +26,46 @@ namespace Assets.Scripts
                 return;
             }
             StartCoroutine(Life());
+
+            bool NegativeY = true;
+            if(YRotation > 90)
+            {
+                YRotation -= 270;
+                NegativeY = false;
+                YRotation = 90 - YRotation;
+            }
+
+            Debug.Log(YRotation);
+
+            if (YRotation >= 0)
+            {
+                if(NegativeY)
+                {
+                    YSpeed = -1 * speed * (float)Math.Sin(YRotation);
+                }
+                else
+                {
+                    YSpeed = speed * (float)Math.Sin(YRotation);
+                }
+                ZSpeed = speed * (float)Math.Cos(YRotation);
+            }
+
+            if(ZSpeed < 0)
+            {
+                ZSpeed *= -1;
+            }
+            if(YSpeed < 0 && !NegativeY)
+            {
+                YSpeed *= -1;
+            }
+
+            Debug.Log(YSpeed + " " + ZSpeed);
+            
         }
 
         void Update()
         {
-            transform.Translate(0, 0, speed * Time.deltaTime);
+            transform.Translate(0, YSpeed * Time.deltaTime, ZSpeed * Time.deltaTime);
         }
 
         IEnumerator Life()

@@ -8,7 +8,10 @@ using Assets.Scripts.Recording;
 using Assets.Scripts.Recording.PlayerActions;
 using Assets.Scripts;
 
+<<<<<<< HEAD
+=======
 //[RequireComponent(typeof(Rigidbody))]
+>>>>>>> 646c63a25776765dfc539acde4751cb1d5c1ab7a
 [RequireComponent(typeof(Collider))]
 public class Player : Character
 {
@@ -18,6 +21,9 @@ public class Player : Character
     /// Object used to record all of the players action in a round.
     /// </summary>
     private PlayersActionsInRound ActionsInRound;
+
+    [SerializeField]
+    public Camera MainCamera;
 
     /// <summary>
     /// Represents the color that the screen should flash when the character is damaged
@@ -63,6 +69,7 @@ public class Player : Character
     /// </summary>
     void Start()
     {
+        UnityEngine.Cursor.visible = false;
         ActionsInRound = new PlayersActionsInRound();
         DamageFlashColour = new Color(1f, 0f, 0f, 0.1f);
         PlayerMovement = GetComponentInParent<FPSInput>();
@@ -99,9 +106,11 @@ public class Player : Character
                 FireSound.Play();
             }
 
-            CmdShoot();
+            float YRotation = MainCamera.transform.localEulerAngles.x;
 
-            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber));
+            CmdShoot(YRotation);
+
+            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber, YRotation));
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && !IsJumping)

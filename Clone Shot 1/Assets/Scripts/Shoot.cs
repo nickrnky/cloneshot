@@ -28,40 +28,27 @@ namespace Assets.Scripts
             StartCoroutine(Life());
             
             Debug.Log(YRotation);
+
+            bool neg = true;
             if (YRotation > 270)
             {
+                neg = false;
                 YRotation -= 270;
                 YRotation = 90 - YRotation;
             }
-            else if (YRotation < 90 && YRotation > 0)
-            {
-                YRotation -= 90;
-            }
-            else
-            {
-                YRotation = 0;
-            }
 
+            YSpeed = 30 * YRotation / 90;
 
-            if (YRotation >= 0)
+            if(neg)
             {
-                YSpeed = speed * (float)Math.Sin(YRotation);
-                
-                ZSpeed = speed * (float)Math.Cos(YRotation);
+                YSpeed *= -1;
             }
-
-            if(ZSpeed < 0)
-            {
-                ZSpeed *= -1;
-            }
-
-            Debug.Log(YSpeed + " " + ZSpeed);
             
         }
 
         void Update()
         {
-            transform.Translate(0, YSpeed * Time.deltaTime, ZSpeed * Time.deltaTime);
+            transform.Translate(0, YSpeed * Time.deltaTime, speed * Time.deltaTime);
         }
 
         IEnumerator Life()

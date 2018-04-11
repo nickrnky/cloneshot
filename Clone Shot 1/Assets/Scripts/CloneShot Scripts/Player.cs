@@ -8,10 +8,10 @@ using Assets.Scripts.Recording;
 using Assets.Scripts.Recording.PlayerActions;
 using Assets.Scripts;
 
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
 //[RequireComponent(typeof(Rigidbody))]
->>>>>>> 646c63a25776765dfc539acde4751cb1d5c1ab7a
+//>>>>>>> 646c63a25776765dfc539acde4751cb1d5c1ab7a
 [RequireComponent(typeof(Collider))]
 public class Player : Character
 {
@@ -55,9 +55,6 @@ public class Player : Character
 
     private Vector3 PreviousMovement;
     private Quaternion PreviousRotation;
-
-    private bool PlayerDead = false;
-
 
 
     #endregion Properties
@@ -134,12 +131,12 @@ public class Player : Character
     public override void Die()
     {
         PlayerMovement.AllowMovement = false;
-        PlayerDead = true;
+        IsDead = true;
     }
 
     public bool IsAlive()
     {
-        return !PlayerDead;
+        return !IsDead;
     }
 
     public string GetPlayerID()

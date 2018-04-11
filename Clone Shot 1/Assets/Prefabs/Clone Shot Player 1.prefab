@@ -416,7 +416,6 @@ MonoBehaviour:
   - {fileID: 114729459089339750}
   - {fileID: 20758185565582952}
   - {fileID: 81406333962304472}
-  PrefabsToRegister: []
 --- !u!114 &114999757855244314
 MonoBehaviour:
   m_ObjectHideFlags: 1

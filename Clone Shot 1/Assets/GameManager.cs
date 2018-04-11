@@ -280,6 +280,7 @@ public class GameManager : MonoBehaviour {
         if (controller != null)
         {
             controller.ResetActions();
+            controller.IsDead = false;
         }
         else
         {

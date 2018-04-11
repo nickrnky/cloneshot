@@ -8,10 +8,10 @@ using UnityEngine.Networking;
 
 namespace Assets.Scripts
 {
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
     //[RequireComponent(typeof(Rigidbody))]
->>>>>>> 646c63a25776765dfc539acde4751cb1d5c1ab7a
+//>>>>>>> 646c63a25776765dfc539acde4751cb1d5c1ab7a
     [RequireComponent(typeof(Collider))]
     public class Character : NetworkBehaviour
     {

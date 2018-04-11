@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
         {
             RoundInProgress = true;
             Debug.Log("Starting Round");
-            //StartCoroutine(StartRound());
+            StartCoroutine(StartRound());
             return;
         }
 
@@ -197,12 +197,29 @@ public class GameManager : MonoBehaviour {
 
     private bool TeamAlive(List<GameObject> clones, Player player)
     {
+        // Temp variables
+        bool MainPlayer = true;
+        bool CloneLife = false;
+
         // Check player for life
+        if (player.IsAlive())
+        {
+            MainPlayer = false;
+        }
 
         // Check clones for life
         foreach(GameObject x in clones)
         {
+            if (x.GetComponent<Player>().IsAlive())
+            {
+                CloneLife = true;
+            }
+        }
 
+        // Return based on results
+        if(!MainPlayer && !CloneLife)
+        {
+            return false;
         }
 
         return true;

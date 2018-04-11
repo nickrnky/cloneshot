@@ -50,6 +50,8 @@ public class Player : Character
     private Vector3 PreviousMovement;
     private Quaternion PreviousRotation;
 
+    private bool PlayerDead = false;
+
 
 
     #endregion Properties
@@ -123,6 +125,12 @@ public class Player : Character
     public override void Die()
     {
         PlayerMovement.AllowMovement = false;
+        PlayerDead = true;
+    }
+
+    public bool IsAlive()
+    {
+        return !PlayerDead;
     }
 
     public string GetPlayerID()

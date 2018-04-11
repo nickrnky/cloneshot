@@ -21,6 +21,10 @@ namespace Assets.Scripts
 
         void Start()
         {
+            if (!isServer)
+            {
+                return;
+            }
             StartCoroutine(Life());
 
             bool NegativeY = true;

@@ -26,37 +26,33 @@ namespace Assets.Scripts
                 return;
             }
             StartCoroutine(Life());
-
-            bool NegativeY = true;
-            if(YRotation > 90)
+            
+            Debug.Log(YRotation);
+            if (YRotation > 270)
             {
                 YRotation -= 270;
-                NegativeY = false;
                 YRotation = 90 - YRotation;
             }
+            else if (YRotation < 90 && YRotation > 0)
+            {
+                YRotation -= 90;
+            }
+            else
+            {
+                YRotation = 0;
+            }
 
-            Debug.Log(YRotation);
 
             if (YRotation >= 0)
             {
-                if(NegativeY)
-                {
-                    YSpeed = -1 * speed * (float)Math.Sin(YRotation);
-                }
-                else
-                {
-                    YSpeed = speed * (float)Math.Sin(YRotation);
-                }
+                YSpeed = speed * (float)Math.Sin(YRotation);
+                
                 ZSpeed = speed * (float)Math.Cos(YRotation);
             }
 
             if(ZSpeed < 0)
             {
                 ZSpeed *= -1;
-            }
-            if(YSpeed < 0 && !NegativeY)
-            {
-                YSpeed *= -1;
             }
 
             Debug.Log(YSpeed + " " + ZSpeed);

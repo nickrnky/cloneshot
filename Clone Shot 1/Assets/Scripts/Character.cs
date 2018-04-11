@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 
 namespace Assets.Scripts
 {
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
     public class Character : NetworkBehaviour
     {
@@ -110,9 +109,15 @@ namespace Assets.Scripts
         /// Sends a shoot command originating from the player
         /// </summary>
         [Command]
-        public void CmdShoot()
+        public void CmdShoot(float CurrentYRotation)
         {
-            GameObject _gunshot = (GameObject)Instantiate(bulletPrefab, transform.TransformPoint(Vector3.forward * 1.5f), transform.rotation);
+            GameObject _gunshot = (GameObject)Instantiate(bulletPrefab, transform.TransformPoint(0,.7f,1.5f), transform.rotation);
+            Shoot ShootScript = _gunshot.GetComponent<Shoot>();
+
+            if(ShootScript != null)
+            {
+                ShootScript.YRotation = CurrentYRotation;
+            }
             NetworkServer.SpawnWithClientAuthority(_gunshot, connectionToClient);
         }
 

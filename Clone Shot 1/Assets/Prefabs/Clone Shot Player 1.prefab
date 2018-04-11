@@ -63,7 +63,6 @@ GameObject:
   - component: {fileID: 114972656286064674}
   - component: {fileID: 114999757855244314}
   - component: {fileID: 114627052339250430}
-  - component: {fileID: 54967887237995990}
   m_Layer: 0
   m_Name: Clone Shot Player 1
   m_TagString: Player
@@ -253,21 +252,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1158242376849180}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54967887237995990
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1632085744572838}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65881226214052500
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -347,6 +331,7 @@ MonoBehaviour:
   DistanceToTheGround: 0
   GroundCheck: {fileID: 4476823731657246}
   MaxHealth: 100
+  MainCamera: {fileID: 20758185565582952}
   DamageFlashSpeed: 5
   FireSound: {fileID: 0}
   JumpForce: 100

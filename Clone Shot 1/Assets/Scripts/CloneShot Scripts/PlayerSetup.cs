@@ -7,6 +7,9 @@ public class PlayerSetup : NetworkBehaviour {
     [SerializeField]
     Behaviour[] componentsToDisable;
 
+    //[SerializeField]
+    //GameObject[] PrefabsToRegister;
+
     Camera sceneCamera;
 
     private void Start()
@@ -17,6 +20,13 @@ public class PlayerSetup : NetworkBehaviour {
             {
                 componentsToDisable[i].enabled = false;
             }
+
+            /*
+            for (int i = 0; i < PrefabsToRegister.Length; i++)
+            {
+                ClientScene.RegisterPrefab(PrefabsToRegister[i]);
+            }
+            */
         }
         else
         {

@@ -8,7 +8,7 @@ using Assets.Scripts.Recording;
 using Assets.Scripts.Recording.PlayerActions;
 using Assets.Scripts;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class Player : Character
 {

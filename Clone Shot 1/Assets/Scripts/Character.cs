@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 namespace Assets.Scripts
 {
-    [RequireComponent(typeof(Rigidbody))]
+    //[RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
     public class Character : NetworkBehaviour
     {
@@ -89,7 +89,6 @@ namespace Assets.Scripts
             IsDead = false;
             Damaged = false;
             CurrentHealth = 100;
-
 
             _camera = GetComponent<Camera>();
 

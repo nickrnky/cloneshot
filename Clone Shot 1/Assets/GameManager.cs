@@ -132,11 +132,13 @@ public class GameManager : MonoBehaviour {
         foreach(GameObject x in TeamOneClones)
         {
             ResetClone(x);
+            x.SetActive(true);
         }
 
         foreach(GameObject x in TeamTwoClones)
         {
             ResetClone(x);
+            x.SetActive(true);
         }
 
         // Start game
@@ -213,6 +215,10 @@ public class GameManager : MonoBehaviour {
             if (x.GetComponent<Player>().IsAlive())
             {
                 CloneLife = true;
+            }
+            else
+            {
+                x.SetActive(false);
             }
         }
 

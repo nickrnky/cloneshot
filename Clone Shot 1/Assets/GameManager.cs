@@ -120,11 +120,13 @@ public class GameManager : MonoBehaviour {
         {
             if(count % 2 == 0)
             {
-                person.transform.position = PlayerOneStart;
+                //person.transform.position = PlayerOneStart;
+                person.RpcRespawn(PlayerOneStart);
             }
             else
             {
                 person.transform.position = PlayerTwoStart;
+                person.RpcRespawn(PlayerTwoStart);
             }
         }
 

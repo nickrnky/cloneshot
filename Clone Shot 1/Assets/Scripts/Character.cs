@@ -118,7 +118,8 @@ namespace Assets.Scripts
             {
                 ShootScript.YRotation = CurrentYRotation;
             }
-            NetworkServer.SpawnWithClientAuthority(_gunshot, connectionToClient);
+            //NetworkServer.SpawnWithClientAuthority(_gunshot, connectionToClient);
+            NetworkServer.Spawn(_gunshot);
         }
 
         /// <summary>

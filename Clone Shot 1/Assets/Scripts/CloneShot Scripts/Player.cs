@@ -154,6 +154,13 @@ public class Player : Character
         }
     }
 
+    // Respawn player called on server but run on client
+    [ClientRpc]
+    public void RpcRespawn(Vector3 location)
+    {
+        this.transform.position = location;
+    }
+
 
     internal PlayersActionsInRound GetPlayerActions()
     {

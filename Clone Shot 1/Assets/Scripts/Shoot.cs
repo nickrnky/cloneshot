@@ -57,7 +57,7 @@ namespace Assets.Scripts
             NetworkServer.Destroy(gameObject);
         }
 
-        [Client]
+        [Server]
         void OnTriggerEnter(Collider other)
         {
             Player target = other.gameObject.GetComponent<Player>();

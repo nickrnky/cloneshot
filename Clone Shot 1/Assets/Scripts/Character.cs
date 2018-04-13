@@ -58,7 +58,8 @@ namespace Assets.Scripts
         /// <summary>
         /// Is set to true if the player is dead.
         /// </summary>
-        internal bool IsDead { get; set; }
+        [SyncVar]
+        internal bool IsDead;
 
         /// <summary>
         /// Returns true if the player is jumping
@@ -143,7 +144,8 @@ namespace Assets.Scripts
         /// Causes the character to take damage.
         /// </summary>
         /// <param name="damage"></param>
-        public void TakeDamage(int damage)
+        [ClientRpc]
+        public void RpcTakeDamage(int damage)
         {
             CurrentHealth -= damage;
 

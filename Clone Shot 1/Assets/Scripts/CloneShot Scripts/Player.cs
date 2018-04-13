@@ -129,6 +129,7 @@ public class Player : Character
     {
         PlayerMovement.AllowMovement = false;
         IsDead = true;
+        Debug.Log("Player " + GetPlayerID() + " is dead!");
     }
 
     public bool IsAlive()

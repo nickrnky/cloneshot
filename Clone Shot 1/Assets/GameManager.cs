@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
     // Management variables
     private bool RoundInProgress = false;
     private int CurrentRound = 0;
-    private List<GameObject> TeamOneClones;
-    private List<GameObject> TeamTwoClones;
+    private List<GameObject> TeamOneClones = new List<GameObject>();
+    private List<GameObject> TeamTwoClones = new List<GameObject>();
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
     private const string PLAYER_ID_PREFIX = "Player ";
     //private GameObject PlayerOne;
@@ -162,11 +162,12 @@ public class GameManager : MonoBehaviour {
                 if(count % 2 == 0 && !TeamAlive(TeamOneClones, y)){
                     StillFighting = false;
                 }
-                else if (count % 2 == 0 && !TeamAlive(TeamTwoClones, y)){
+                else if (count % 2 != 0 && !TeamAlive(TeamTwoClones, y)){
                     StillFighting = false;
                 }
             }
         }
+        Debug.Log("No longer fighting");
 
         // Clean up and get recording
         count = 0;

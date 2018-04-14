@@ -57,9 +57,14 @@ namespace Assets.Scripts
             NetworkServer.Destroy(gameObject);
         }
 
-        [Client]
+        //[Command]
         void OnTriggerEnter(Collider other)
         {
+            if (!isServer)
+            {
+                return;
+            }
+
             Player target = other.gameObject.GetComponent<Player>();
             if (target != null)
             {
@@ -98,7 +103,7 @@ namespace Assets.Scripts
             Debug.Log(_playerID + " has been shot!");
 
             Player _player = GameManager.GetPlayer(_playerID);
-            _player.TakeDamage(_damage);
+            _player.RpcTakeDamage(_damage);
 
         }
     }

@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour {
     // Management variables
     private bool RoundInProgress = false;
     private int CurrentRound = 0;
-    private List<GameObject> TeamOneClones;
-    private List<GameObject> TeamTwoClones;
+    private List<GameObject> TeamOneClones = new List<GameObject>();
+    private List<GameObject> TeamTwoClones = new List<GameObject>();
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
     private const string PLAYER_ID_PREFIX = "Player ";
+    private static int NumberPlayers = 0;
     //private GameObject PlayerOne;
     //private GameObject PlayerTwo;
 
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
         // Check server
         /*
         if (!isServer)
@@ -53,9 +54,10 @@ public class GameManager : MonoBehaviour {
             return;
         }
         */
+        //Debug.Log("Connections: " + Network.connections.Length);
 
         // Wait for players
-        if(Network.connections.Length < 2)
+        if(NumberPlayers < 2)
         {
             RoundInProgress = false;
             return;
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour {
         {
             RoundInProgress = true;
             Debug.Log("Starting Round");
-            StartCoroutine(StartRound());
+            //StartCoroutine(StartRound());
             return;
         }
 
@@ -79,14 +81,16 @@ public class GameManager : MonoBehaviour {
         players.Add(_playerID, _player);
         _player.SetPlayerID(_playerID);
         _player.transform.name = _playerID;
+        NumberPlayers++;
 
     }
 
     public static void UuRegisterPlayer(string _playerID)
     {
         players.Remove(_playerID);
+        NumberPlayers--;
     }
-    
+
     public static Player GetPlayer (string _playerID)
     {
         return players[_playerID];
@@ -120,11 +124,13 @@ public class GameManager : MonoBehaviour {
         {
             if(count % 2 == 0)
             {
-                person.transform.position = PlayerOneStart;
+                //person.transform.position = PlayerOneStart;
+                person.RpcRespawn(PlayerOneStart);
             }
             else
             {
                 person.transform.position = PlayerTwoStart;
+                person.RpcRespawn(PlayerTwoStart);
             }
         }
 
@@ -162,11 +168,12 @@ public class GameManager : MonoBehaviour {
                 if(count % 2 == 0 && !TeamAlive(TeamOneClones, y)){
                     StillFighting = false;
                 }
-                else if (count % 2 == 0 && !TeamAlive(TeamTwoClones, y)){
+                else if (count % 2 != 0 && !TeamAlive(TeamTwoClones, y)){
                     StillFighting = false;
                 }
             }
         }
+        Debug.Log("No longer fighting");
 
         // Clean up and get recording
         count = 0;

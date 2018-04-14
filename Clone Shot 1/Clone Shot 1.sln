@@ -1,6 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+<<<<<<< HEAD
 # Visual Studio 15
+=======
+# Visual Studio 2017
+>>>>>>> master
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clone Shot 1", "Clone Shot 1.csproj", "{852DFDC5-4236-FF4A-AC05-C5CB47939782}"
 EndProject
 Global

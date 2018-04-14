@@ -129,6 +129,7 @@ public class Player : Character
     {
         PlayerMovement.AllowMovement = false;
         IsDead = true;
+        Debug.Log("Player " + GetPlayerID() + " is dead!");
     }
 
     public bool IsAlive()
@@ -151,6 +152,13 @@ public class Player : Character
         {
             Debug.Log("Cannot set a players ID twice!");
         }
+    }
+
+    // Respawn player called on server but run on client
+    [ClientRpc]
+    public void RpcRespawn(Vector3 location)
+    {
+        this.transform.position = location;
     }
 
 

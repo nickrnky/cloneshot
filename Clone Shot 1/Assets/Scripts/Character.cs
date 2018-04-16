@@ -137,7 +137,7 @@ namespace Assets.Scripts
         /// <param name="Force"></param>
         public void Jump(Vector3 Force)
         {
-            SelfRigidBody.AddForce(Force);
+            //SelfRigidBody.AddForce(Force);
         }
 
         /// <summary>

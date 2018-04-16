@@ -21,9 +21,7 @@ GameObject:
   - component: {fileID: 4602201782610336}
   - component: {fileID: 82736186429086548}
   - component: {fileID: 114700017508815656}
-  - component: {fileID: 114843325262711448}
   - component: {fileID: 143664117539006950}
-  - component: {fileID: 114579792537103664}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -305,20 +303,6 @@ MonoBehaviour:
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45
---- !u!114 &114579792537103664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1073981851527708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d70ee4dcd75c4749944cb72b5776f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 20
-  gravity: -9.8
-  AllowMovement: 1
 --- !u!114 &114612377262058662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,22 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959c853da5ccdcc4093349398a266766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114843325262711448
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1073981851527708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51fd153b1f902a54c96a549e1abf644e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 1
-  sensitivityHor: 9
-  sensitivityVert: 9
-  minimumVert: -45
-  maximumVert: 45
 --- !u!124 &124466718560603200
 Behaviour:
   m_ObjectHideFlags: 1

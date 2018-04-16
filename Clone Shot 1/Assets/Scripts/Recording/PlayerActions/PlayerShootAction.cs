@@ -11,7 +11,7 @@ namespace Assets.Scripts.Recording.PlayerActions
     /// </summary>
     internal class PlayerShootAction : PlayerAction
     {
-        private float YRotation;
+        private Vector3 PointToTravelTo;
 
         #region Constructor
 
@@ -19,11 +19,11 @@ namespace Assets.Scripts.Recording.PlayerActions
         /// The frame number represents when the action took place
         /// </summary>
         /// <param name="frameNumber"></param>
-        public PlayerShootAction(int frameNumber, float yRotation)
+        public PlayerShootAction(int frameNumber, Vector3 pointToTravelTo)
             : base(frameNumber)
         {
             ActionType = PlayerActions.Shoot;
-            YRotation = yRotation;
+            PointToTravelTo = pointToTravelTo;
         }
 
         #endregion Constructor
@@ -39,7 +39,7 @@ namespace Assets.Scripts.Recording.PlayerActions
             Character Player = Object.GetComponent<Character>();
             if (Player != null)
             {
-                Player.CmdShoot(YRotation);
+                Player.CmdShoot(PointToTravelTo);
             }
         }
 

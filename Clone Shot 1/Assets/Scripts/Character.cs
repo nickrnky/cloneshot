@@ -110,14 +110,14 @@ namespace Assets.Scripts
         /// Sends a shoot command originating from the player
         /// </summary>
         [Command]
-        public void CmdShoot(float CurrentYRotation)
+        public void CmdShoot(Vector3 PointToTravelTo)
         {
             GameObject _gunshot = (GameObject)Instantiate(bulletPrefab, transform.TransformPoint(0,.7f,1.5f), transform.rotation);
             Shoot ShootScript = _gunshot.GetComponent<Shoot>();
 
             if(ShootScript != null)
             {
-                ShootScript.YRotation = CurrentYRotation;
+                ShootScript.PointToTravelTo = PointToTravelTo;
             }
             //NetworkServer.SpawnWithClientAuthority(_gunshot, connectionToClient);
             NetworkServer.Spawn(_gunshot);

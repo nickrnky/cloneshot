@@ -102,9 +102,11 @@ public class Player : Character
 
             float YRotation = MainCamera.transform.localEulerAngles.x;
 
-            CmdShoot(YRotation);
+            Vector3 point = new Vector3(MainCamera.pixelWidth / 2, MainCamera.pixelHeight / 2, 0);
 
-            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber, YRotation));
+            CmdShoot(point);
+
+            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber, point));
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && !IsJumping)

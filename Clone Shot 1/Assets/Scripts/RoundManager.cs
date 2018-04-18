@@ -66,7 +66,7 @@ public class RoundManager : NetworkBehaviour {
         if (CurrentRound < NumberOfRounds && RoundInProgress == 0)
         {
             RoundInProgress = 1;
-            Debug.Log("Starting Round");
+            Debug.Log("Starting Round " + CurrentRound);
             StartCoroutine(StartRound());
             return;
         }
@@ -97,6 +97,7 @@ public class RoundManager : NetworkBehaviour {
         // Post processing
         if(RoundInProgress == 3)
         {
+            Debug.Log("Round over " + CurrentRound);
             RoundInProgress = 4;
             StartCoroutine(PostProcessing());
         }

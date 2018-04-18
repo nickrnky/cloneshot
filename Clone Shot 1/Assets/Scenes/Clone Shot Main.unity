@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a407bdce5329398458e80176e6c8cead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClonePrefab: {fileID: 1264545979673688, guid: 9d46c7fcec02c684186003bdbfba78f7,
+  ClonePrefab: {fileID: 1783696223959246, guid: 9d46c7fcec02c684186003bdbfba78f7,
     type: 2}
   DaManager: {fileID: 370659140}
   NumberOfRounds: 5

@@ -21,7 +21,7 @@ public class CloneController : Character
     /// <summary>
     /// Controls whether or not the controller should be performing actions. Controlled by the start and stop functions.
     /// </summary>
-    private bool DoActions;
+    private bool DoActions = false;
 
     /// <summary>
     /// The point that the clone should start its actions at.
@@ -37,9 +37,6 @@ public class CloneController : Character
     /// </summary>
     void Start()
     {
-        DoActions = false;
-
-        Actions = new PlayersActionsInRound();
 
         CurrentFrameNumber = 0;
 
@@ -67,7 +64,6 @@ public class CloneController : Character
                     }
                 }
             }
-            else { Debug.Log("Actions are null in clone controller"); }
 
         }
     }
@@ -120,6 +116,11 @@ public class CloneController : Character
     internal void StopActions()
     {
         DoActions = false;
+    }
+
+    internal void Test()
+    {
+        Actions.Test();
     }
 
     #endregion Internal Methods

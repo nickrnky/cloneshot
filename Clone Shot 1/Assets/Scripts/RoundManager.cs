@@ -40,7 +40,7 @@ public class RoundManager : NetworkBehaviour {
         }
         RoundInProgress = 0;
         PlayerOneStart = Spawner1.transform.position;
-        PlayerOneStart = Spawner2.transform.position;
+        PlayerTwoStart = Spawner2.transform.position;
 
     }
 	

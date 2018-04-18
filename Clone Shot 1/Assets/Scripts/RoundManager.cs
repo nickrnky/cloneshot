@@ -181,7 +181,7 @@ public class RoundManager : NetworkBehaviour {
         foreach(Player y in players.Values)
         {
             y.IsDead = false;
-            y.PlayerMovement.AllowMovement = true;
+            //y.PlayerMovement.AllowMovement = true;
         }
 
         Debug.Log("round 6");

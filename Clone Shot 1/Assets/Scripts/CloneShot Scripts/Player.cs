@@ -134,6 +134,7 @@ public class Player : Character
     public void RpcRespawn(Vector3 location)
     {
         this.transform.position = location;
+        PlayerMovement.AllowMovement = true;
         ActionsInRound = new PlayersActionsInRound();
     }
 

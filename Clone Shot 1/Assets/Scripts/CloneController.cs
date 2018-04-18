@@ -48,6 +48,11 @@ public class CloneController : Character
     /// </summary>
     void Update()
     {
+        if(IsDead)
+        {
+            DoActions = false;
+            gameObject.SetActive(false);
+        }
         if (DoActions)
         {
             CurrentFrameNumber++;

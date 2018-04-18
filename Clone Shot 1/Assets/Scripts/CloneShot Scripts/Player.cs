@@ -58,7 +58,7 @@ public class Player : Character
     /// </summary>
     void Start()
     {
-        UnityEngine.Cursor.visible = false;
+
         ActionsInRound = new PlayersActionsInRound();
         DamageFlashColour = new Color(1f, 0f, 0f, 0.1f);
         PlayerMovement = GetComponentInParent<FPSInput>();
@@ -142,6 +142,11 @@ public class Player : Character
     internal PlayersActionsInRound GetPlayerActions()
     {
         return ActionsInRound;
+    }
+
+    internal void ResetActions()
+    {
+        ActionsInRound = new PlayersActionsInRound();
     }
 
     #endregion Private Methods

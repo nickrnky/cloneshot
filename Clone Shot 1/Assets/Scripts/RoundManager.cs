@@ -142,6 +142,11 @@ public class RoundManager : NetworkBehaviour {
         }
         Debug.Log("round 4");
 
+        foreach(Player x in players.Values)
+        {
+            x.ResetActions();
+        }
+
         // Start game
         foreach (GameObject x in TeamOneClones)
         {

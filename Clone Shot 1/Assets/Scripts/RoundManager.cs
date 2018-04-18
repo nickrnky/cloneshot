@@ -12,7 +12,7 @@ public class RoundManager : NetworkBehaviour {
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
     // Management variables
-    private bool RoundInProgress = false;
+    private int RoundInProgress = 0;
     private int CurrentRound = 0;
     private List<GameObject> TeamOneClones = new List<GameObject>();
     private List<GameObject> TeamTwoClones = new List<GameObject>();
@@ -36,7 +36,7 @@ public class RoundManager : NetworkBehaviour {
         {
             return;
         }
-        RoundInProgress = false;
+        RoundInProgress = 0;
 
     }
 	
@@ -55,17 +55,48 @@ public class RoundManager : NetworkBehaviour {
         // Wait for players
         if (DaManager.GetComponent<GameManager>().GetNumberPlayers() < 2)
         {
-            RoundInProgress = false;
+            RoundInProgress = 0;
             return;
         }
 
-        if (CurrentRound < NumberOfRounds && RoundInProgress == false)
+        if (CurrentRound < NumberOfRounds && RoundInProgress == 0)
         {
-            RoundInProgress = true;
+            RoundInProgress = 1;
             Debug.Log("Starting Round");
             StartCoroutine(StartRound());
             return;
         }
+
+        // Loop and check for game end
+        if(RoundInProgress == 2)
+        {
+            int count = 0;
+            foreach (Player y in players.Values)
+            {
+                if (count % 2 == 0 && !TeamAlive(TeamOneClones, y))
+                {
+                    RoundInProgress = 3;
+                    Debug.Log("No longer fighting");
+                    break;
+                }
+                else if (count % 2 != 0 && !TeamAlive(TeamTwoClones, y))
+                {
+                    RoundInProgress = 3;
+                    Debug.Log("No longer fighting");
+                    break;
+                }
+                count++;
+            }
+            
+        }
+        
+        // Post processing
+        if(RoundInProgress == 3)
+        {
+            RoundInProgress = 4;
+            StartCoroutine(PostProcessing());
+        }
+        
 
     }
 
@@ -121,29 +152,14 @@ public class RoundManager : NetworkBehaviour {
         }
 
         Debug.Log("round 5");
+        RoundInProgress = 2;
+        yield return null;
+    }
 
-        // Loop and check for game end
-        count = 0;
-        bool StillFighting = true;
-        while (StillFighting)
-        {
-            foreach (Player y in players.Values)
-            {
-                if (count % 2 == 0 && !TeamAlive(TeamOneClones, y))
-                {
-                    StillFighting = false;
-                }
-                else if (count % 2 != 0 && !TeamAlive(TeamTwoClones, y))
-                {
-                    StillFighting = false;
-                }
-            }
-            count++;
-        }
-        Debug.Log("No longer fighting");
-
+    // Post round
+    IEnumerator PostProcessing() {
         // Clean up and get recording
-        count = 0;
+        int count = 0;
         foreach (Player y in players.Values)
         {
             PlayersActionsInRound action = new PlayersActionsInRound();
@@ -170,7 +186,7 @@ public class RoundManager : NetworkBehaviour {
 
         // End
         CurrentRound++;
-        RoundInProgress = false;
+        RoundInProgress = 0;
         yield return null;
     }
 

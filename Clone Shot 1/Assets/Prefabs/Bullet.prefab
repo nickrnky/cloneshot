@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dfe268b43cbdbe4899a12eba1e2c512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 50
   Damage: 5
   Lifetime: 10
+  PointToTravelTo: {x: 0, y: 0, z: 0}
 --- !u!114 &114137445238862382
 MonoBehaviour:
   m_ObjectHideFlags: 1

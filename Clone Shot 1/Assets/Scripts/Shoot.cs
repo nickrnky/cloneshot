@@ -34,30 +34,12 @@ namespace Assets.Scripts
             float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
-            //Debug.Log(YRotation);
-
-            //bool neg = true;
-            //if (YRotation > 270)
-            //{
-            //    neg = false;
-            //    YRotation -= 270;
-            //    YRotation = 90 - YRotation;
-            //}
-
-            //YSpeed = 30 * YRotation / 90;
-
-            //if(neg)
-            //{
-            //    YSpeed *= -1;
-            //}
 
         }
 
         void Update()
         {
             transform.position += transform.forward * speed * Time.deltaTime;
-
-            //transform.Translate(0, YSpeed * Time.deltaTime, speed * Time.deltaTime);
         }
 
         IEnumerator Life()

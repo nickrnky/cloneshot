@@ -216,7 +216,7 @@ public class RoundManager : NetworkBehaviour {
         // Check clones for life
         foreach (GameObject x in clones)
         {
-            if (x.GetComponent<Player>().IsAlive())
+            if (x.GetComponent<CloneController>().IsAlive())
             {
                 CloneLife = true;
             }

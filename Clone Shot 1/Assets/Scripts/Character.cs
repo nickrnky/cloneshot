@@ -106,6 +106,10 @@ namespace Assets.Scripts
 
         #region Public Functions
 
+        public bool IsAlive()
+        {
+            return !IsDead;
+        }
         /// <summary>
         /// Sends a shoot command originating from the player
         /// </summary>

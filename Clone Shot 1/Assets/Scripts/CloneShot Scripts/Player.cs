@@ -134,10 +134,6 @@ public class Player : Character
         Debug.Log("Player " + GetPlayerID() + " is dead!");
     }
 
-    public bool IsAlive()
-    {
-        return !IsDead;
-    }
 
     public string GetPlayerID()
     {

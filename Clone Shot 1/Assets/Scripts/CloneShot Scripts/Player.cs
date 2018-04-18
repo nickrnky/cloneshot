@@ -161,6 +161,7 @@ public class Player : Character
     public void RpcRespawn(Vector3 location)
     {
         this.transform.position = location;
+        ActionsInRound = new PlayersActionsInRound();
     }
 
 

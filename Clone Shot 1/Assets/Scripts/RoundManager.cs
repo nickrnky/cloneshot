@@ -150,7 +150,7 @@ public class RoundManager : NetworkBehaviour {
 
             if (count % 2 == 0)
             {
-                //TeamOneClones.Add(CreateClone(PlayerOneStart, action));
+                TeamOneClones.Add(CreateClone(PlayerOneStart, action));
             }
             else
             {
@@ -182,7 +182,7 @@ public class RoundManager : NetworkBehaviour {
         bool CloneLife = false;
 
         // Check player for life
-        if (player.IsAlive())
+        if (!player.IsAlive())
         {
             MainPlayer = false;
         }

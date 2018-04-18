@@ -173,7 +173,7 @@ public class RoundManager : NetworkBehaviour {
             }
             else
             {
-                //TeamTwoClones.Add(CreateClone(PlayerTwoStart, action));
+                TeamTwoClones.Add(CreateClone(PlayerTwoStart, action));
             }
         }
 

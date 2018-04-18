@@ -138,6 +138,7 @@ public class RoundManager : NetworkBehaviour {
                     StillFighting = false;
                 }
             }
+            count++;
         }
         Debug.Log("No longer fighting");
 
@@ -156,6 +157,13 @@ public class RoundManager : NetworkBehaviour {
             {
                 //TeamTwoClones.Add(CreateClone(PlayerTwoStart, action));
             }
+        }
+
+        // Set players to alive
+        foreach(Player y in players.Values)
+        {
+            y.IsDead = false;
+            y.PlayerMovement.AllowMovement = true;
         }
 
         Debug.Log("round 6");

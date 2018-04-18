@@ -169,11 +169,17 @@ public class RoundManager : NetworkBehaviour {
 
             if (count % 2 == 0)
             {
-                TeamOneClones.Add(CmdCreateClone(PlayerOneStart, action));
+                GameObject clone = new GameObject();
+                clone = CreateClone(PlayerOneStart, action);
+                TeamOneClones.Add(clone);
+                CmdSpawnClone(clone);
             }
             else
             {
-                TeamTwoClones.Add(CmdCreateClone(PlayerTwoStart, action));
+                GameObject clone = new GameObject();
+                clone = CreateClone(PlayerOneStart, action);
+                TeamTwoClones.Add(clone);
+                CmdSpawnClone(clone);
             }
         }
 
@@ -243,8 +249,7 @@ public class RoundManager : NetworkBehaviour {
     /// <param name="StartingPosition"></param>
     /// <param name="ActionReader"></param>
     /// <returns></returns>
-    [Command]
-    private GameObject CmdCreateClone(Vector3 StartingPosition, PlayersActionsInRound ActionReader)
+    private GameObject CreateClone(Vector3 StartingPosition, PlayersActionsInRound ActionReader)
     {
         if (StartingPosition == null || ActionReader == null)
         {
@@ -259,7 +264,6 @@ public class RoundManager : NetworkBehaviour {
         }
 
         GameObject Clone = (GameObject)Instantiate(ClonePrefab);
-        NetworkServer.Spawn(Clone);
 
         CloneController Controller = Clone.GetComponent<CloneController>();
 
@@ -273,6 +277,12 @@ public class RoundManager : NetworkBehaviour {
         Controller.SetActionReader(ActionReader);
 
         return Clone;
+    }
+
+    [Command]
+    private void CmdSpawnClone(GameObject Clone)
+    {
+        NetworkServer.Spawn(Clone);
     }
 
     /// <summary>

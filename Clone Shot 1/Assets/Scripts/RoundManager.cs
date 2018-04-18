@@ -20,14 +20,14 @@ public class RoundManager : NetworkBehaviour {
     [SerializeField]
     GameManager DaManager;
 
+    [SerializeField]
+    GameObject Spawner1;
+
+    [SerializeField]
+    GameObject Spawner2;
+
     // Configurable variables
     public int NumberOfRounds = 5;
-    public float Spawn1X = -5;
-    public float Spawn1Y = 2;
-    public float Spawn1Z = 0;
-    public float Spawn2X = 5;
-    public float Spawn2Y = 2;
-    public float Spawn2Z = 0;
     Vector3 PlayerOneStart = new Vector3();
     Vector3 PlayerTwoStart = new Vector3();
 
@@ -39,8 +39,8 @@ public class RoundManager : NetworkBehaviour {
             return;
         }
         RoundInProgress = 0;
-        PlayerOneStart = new Vector3(Spawn1X, Spawn1Y, Spawn1Z);
-        PlayerOneStart = new Vector3(Spawn2X, Spawn2Y, Spawn2Z);
+        PlayerOneStart = Spawner1.transform.position;
+        PlayerOneStart = Spawner2.transform.position;
 
     }
 	

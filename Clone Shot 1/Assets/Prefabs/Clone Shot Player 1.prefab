@@ -229,7 +229,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4476823731657246}
-  - component: {fileID: 33137549876000262}
   - component: {fileID: 65881226214052500}
   - component: {fileID: 23604205601835814}
   m_Layer: 0
@@ -488,7 +487,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4639512224401322}
-  - component: {fileID: 33120474162425612}
   - component: {fileID: 136737246675436884}
   - component: {fileID: 23165454307517050}
   - component: {fileID: 143209608507028448}
@@ -2663,20 +2661,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757499833890080}
   m_Mesh: {fileID: 4300004, guid: 084a19e5cb5520e46a4d4ac11b06443d, type: 3}
---- !u!33 &33120474162425612
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1336527085459870}
-  m_Mesh: {fileID: 0}
---- !u!33 &33137549876000262
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1158242376849180}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33236435966118370
 MeshFilter:
   m_ObjectHideFlags: 1

@@ -51,19 +51,24 @@ public class CloneController : Character
     /// </summary>
     void Update()
     {
-        CurrentFrameNumber++;
-
-        if (Actions != null)
+        if (DoActions)
         {
-            CurrentRoundActions = Actions.GetPlayerActionsForNextFrame();
+            CurrentFrameNumber++;
 
-            if (CurrentRoundActions != null)
+            if (Actions != null)
             {
-                foreach (PlayerAction action in CurrentRoundActions)
+                CurrentRoundActions = Actions.GetPlayerActionsForNextFrame();
+
+                if (CurrentRoundActions != null)
                 {
-                    action.PerformActionOnObject(gameObject);
+                    foreach (PlayerAction action in CurrentRoundActions)
+                    {
+                        action.PerformActionOnObject(gameObject);
+                    }
                 }
             }
+            else { Debug.Log("Actions are null in clone controller"); }
+
         }
     }
 

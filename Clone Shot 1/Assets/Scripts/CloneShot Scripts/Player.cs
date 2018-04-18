@@ -41,11 +41,6 @@ public class Player : Character
     public float JumpForce = 10;
 
     /// <summary>
-    /// Represents the server ID of the player
-    /// </summary>
-    private string PlayerID;
-
-    /// <summary>
     /// The script being used to handle the players movement.
     /// </summary>
     public FPSInput PlayerMovement;
@@ -132,24 +127,6 @@ public class Player : Character
         PlayerMovement.AllowMovement = false;
         IsDead = true;
         Debug.Log("Player " + GetPlayerID() + " is dead!");
-    }
-
-
-    public string GetPlayerID()
-    {
-        return PlayerID;
-    }
-
-    public void SetPlayerID(string ID)
-    {
-        if(string.IsNullOrEmpty(PlayerID))
-        {
-            PlayerID = ID;
-        }
-        else
-        {
-            Debug.Log("Cannot set a players ID twice!");
-        }
     }
 
     // Respawn player called on server but run on client

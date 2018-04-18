@@ -28,6 +28,8 @@ public class RoundManager : NetworkBehaviour {
     public float Spawn2X = 5;
     public float Spawn2Y = 2;
     public float Spawn2Z = 0;
+    Vector3 PlayerOneStart = new Vector3();
+    Vector3 PlayerTwoStart = new Vector3();
 
     // Use this for initialization
     void Start () {
@@ -37,6 +39,8 @@ public class RoundManager : NetworkBehaviour {
             return;
         }
         RoundInProgress = 0;
+        PlayerOneStart = new Vector3(Spawn1X, Spawn1Y, Spawn1Z);
+        PlayerOneStart = new Vector3(Spawn2X, Spawn2Y, Spawn2Z);
 
     }
 	
@@ -104,8 +108,6 @@ public class RoundManager : NetworkBehaviour {
     IEnumerator StartRound()
     {
         // Position players
-        Vector3 PlayerOneStart = new Vector3(Spawn1X, Spawn1Y, Spawn1Z);
-        Vector3 PlayerTwoStart = new Vector3(Spawn2X, Spawn2Y, Spawn2Z);
         Debug.Log("round 1");
 
         int count = 0;

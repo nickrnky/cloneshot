@@ -13,9 +13,12 @@ public class FPSInput : MonoBehaviour {
     public bool AllowMovement = true;
 
 	private CharacterController _charController;
+
+    private float falling_speed;
 	
 	void Start() {
 		_charController = GetComponent<CharacterController>();
+        falling_speed = 0;
 	}
 	
 	void Update() {
@@ -27,11 +30,17 @@ public class FPSInput : MonoBehaviour {
             Vector3 movement = new Vector3(deltaX, 0, deltaZ);
             movement = Vector3.ClampMagnitude(movement, speed);
 
-            movement.y = gravity;
+            falling_speed = gravity * Time.deltaTime + falling_speed;
+            movement.y = falling_speed;
 
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement);
             _charController.Move(movement);
+        }
+
+        if (_charController.isGrounded)
+        {
+            falling_speed = 0;
         }
 	}
 }

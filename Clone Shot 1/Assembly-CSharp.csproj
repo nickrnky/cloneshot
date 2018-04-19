@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerShootAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerTurnAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayersActionsInRound.cs" />
+     <Compile Include="Assets\Scripts\RoundManager.cs" />
      <Compile Include="Assets\Scripts\Shoot.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

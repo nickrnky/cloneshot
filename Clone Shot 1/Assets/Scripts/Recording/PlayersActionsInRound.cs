@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Scripts.Recording
 {
@@ -45,6 +46,23 @@ namespace Assets.Scripts.Recording
         internal void AddAction(PlayerAction action)
         {
             Actions.Add(action);
+        }
+
+        internal void Test()
+        {
+            if(Actions == null)
+            {
+                Debug.Log("Null");
+
+            }
+            else if(!Actions.Any())
+            {
+                Debug.Log("Empty");
+            }
+            else
+            {
+                Debug.Log("Nothing was rwong");
+            }
         }
 
         /// <summary>

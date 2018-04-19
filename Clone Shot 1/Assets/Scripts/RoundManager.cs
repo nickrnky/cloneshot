@@ -12,7 +12,7 @@ public class RoundManager : NetworkBehaviour {
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
     // Management variables
-    private bool RoundInProgress = false;
+    private int RoundInProgress = 0;
     private int CurrentRound = 0;
     private List<GameObject> TeamOneClones = new List<GameObject>();
     private List<GameObject> TeamTwoClones = new List<GameObject>();
@@ -20,14 +20,16 @@ public class RoundManager : NetworkBehaviour {
     [SerializeField]
     GameManager DaManager;
 
+    [SerializeField]
+    GameObject Spawner1;
+
+    [SerializeField]
+    GameObject Spawner2;
+
     // Configurable variables
     public int NumberOfRounds = 5;
-    public float Spawn1X = -5;
-    public float Spawn1Y = 2;
-    public float Spawn1Z = 0;
-    public float Spawn2X = 5;
-    public float Spawn2Y = 2;
-    public float Spawn2Z = 0;
+    Vector3 PlayerOneStart = new Vector3();
+    Vector3 PlayerTwoStart = new Vector3();
 
     // Use this for initialization
     void Start () {
@@ -36,7 +38,9 @@ public class RoundManager : NetworkBehaviour {
         {
             return;
         }
-        RoundInProgress = false;
+        RoundInProgress = 0;
+        PlayerOneStart = Spawner1.transform.position;
+        PlayerTwoStart = Spawner2.transform.position;
 
     }
 	
@@ -55,17 +59,49 @@ public class RoundManager : NetworkBehaviour {
         // Wait for players
         if (DaManager.GetComponent<GameManager>().GetNumberPlayers() < 2)
         {
-            RoundInProgress = false;
+            RoundInProgress = 0;
             return;
         }
 
-        if (CurrentRound < NumberOfRounds && RoundInProgress == false)
+        if (CurrentRound < NumberOfRounds && RoundInProgress == 0)
         {
-            RoundInProgress = true;
-            Debug.Log("Starting Round");
+            RoundInProgress = 1;
+            Debug.Log("Starting Round " + CurrentRound);
             StartCoroutine(StartRound());
             return;
         }
+
+        // Loop and check for game end
+        if(RoundInProgress == 2)
+        {
+            int count = 0;
+            foreach (Player y in players.Values)
+            {
+                if (count % 2 == 0 && !TeamAlive(TeamOneClones, y))
+                {
+                    RoundInProgress = 3;
+                    Debug.Log("No longer fighting");
+                    break;
+                }
+                else if (count % 2 != 0 && !TeamAlive(TeamTwoClones, y))
+                {
+                    RoundInProgress = 3;
+                    Debug.Log("No longer fighting");
+                    break;
+                }
+                count++;
+            }
+            
+        }
+        
+        // Post processing
+        if(RoundInProgress == 3)
+        {
+            Debug.Log("Round over " + CurrentRound);
+            RoundInProgress = 4;
+            StartCoroutine(PostProcessing());
+        }
+        
 
     }
 
@@ -73,8 +109,6 @@ public class RoundManager : NetworkBehaviour {
     IEnumerator StartRound()
     {
         // Position players
-        Vector3 PlayerOneStart = new Vector3(Spawn1X, Spawn1Y, Spawn1Z);
-        Vector3 PlayerTwoStart = new Vector3(Spawn2X, Spawn2Y, Spawn2Z);
         Debug.Log("round 1");
 
         int count = 0;
@@ -109,6 +143,11 @@ public class RoundManager : NetworkBehaviour {
         }
         Debug.Log("round 4");
 
+        foreach(Player x in players.Values)
+        {
+            x.ResetActions();
+        }
+
         // Start game
         foreach (GameObject x in TeamOneClones)
         {
@@ -121,28 +160,14 @@ public class RoundManager : NetworkBehaviour {
         }
 
         Debug.Log("round 5");
+        RoundInProgress = 2;
+        yield return null;
+    }
 
-        // Loop and check for game end
-        count = 0;
-        bool StillFighting = true;
-        while (StillFighting)
-        {
-            foreach (Player y in players.Values)
-            {
-                if (count % 2 == 0 && !TeamAlive(TeamOneClones, y))
-                {
-                    StillFighting = false;
-                }
-                else if (count % 2 != 0 && !TeamAlive(TeamTwoClones, y))
-                {
-                    StillFighting = false;
-                }
-            }
-        }
-        Debug.Log("No longer fighting");
-
+    // Post round
+    IEnumerator PostProcessing() {
         // Clean up and get recording
-        count = 0;
+        int count = 0;
         foreach (Player y in players.Values)
         {
             PlayersActionsInRound action = new PlayersActionsInRound();
@@ -150,19 +175,32 @@ public class RoundManager : NetworkBehaviour {
 
             if (count % 2 == 0)
             {
-                //TeamOneClones.Add(CreateClone(PlayerOneStart, action));
+                GameObject clone = new GameObject();
+                clone = CreateClone(PlayerOneStart, action);
+                TeamOneClones.Add(clone);
+                CmdSpawnClone(clone);
             }
             else
             {
-                //TeamTwoClones.Add(CreateClone(PlayerTwoStart, action));
+                GameObject clone = new GameObject();
+                clone = CreateClone(PlayerOneStart, action);
+                TeamTwoClones.Add(clone);
+                CmdSpawnClone(clone);
             }
+        }
+
+        // Set players to alive
+        foreach(Player y in players.Values)
+        {
+            y.IsDead = false;
+            //y.PlayerMovement.AllowMovement = true;
         }
 
         Debug.Log("round 6");
 
         // End
         CurrentRound++;
-        RoundInProgress = false;
+        RoundInProgress = 0;
         yield return null;
     }
 
@@ -182,7 +220,7 @@ public class RoundManager : NetworkBehaviour {
         bool CloneLife = false;
 
         // Check player for life
-        if (player.IsAlive())
+        if (!player.IsAlive())
         {
             MainPlayer = false;
         }
@@ -190,7 +228,7 @@ public class RoundManager : NetworkBehaviour {
         // Check clones for life
         foreach (GameObject x in clones)
         {
-            if (x.GetComponent<Player>().IsAlive())
+            if (x.GetComponent<CloneController>().IsAlive())
             {
                 CloneLife = true;
             }
@@ -231,8 +269,7 @@ public class RoundManager : NetworkBehaviour {
             return null;
         }
 
-        GameObject Clone = Instantiate(ClonePrefab) as GameObject;
-        NetworkServer.Spawn(Clone);
+        GameObject Clone = (GameObject)Instantiate(ClonePrefab);
 
         CloneController Controller = Clone.GetComponent<CloneController>();
 
@@ -246,6 +283,12 @@ public class RoundManager : NetworkBehaviour {
         Controller.SetActionReader(ActionReader);
 
         return Clone;
+    }
+
+    [Command]
+    private void CmdSpawnClone(GameObject Clone)
+    {
+        NetworkServer.Spawn(Clone);
     }
 
     /// <summary>

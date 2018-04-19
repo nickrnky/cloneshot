@@ -34,6 +34,11 @@ namespace Assets.Scripts
         public int CurrentFrameNumber = 0;
 
         /// <summary>
+        /// Represents the server ID of the player
+        /// </summary>
+        private string PlayerID;
+
+        /// <summary>
         /// Represents the current health of the player
         /// </summary>
         /// 
@@ -106,6 +111,10 @@ namespace Assets.Scripts
 
         #region Public Functions
 
+        public bool IsAlive()
+        {
+            return !IsDead;
+        }
         /// <summary>
         /// Sends a shoot command originating from the player
         /// </summary>
@@ -157,6 +166,23 @@ namespace Assets.Scripts
                 {
                     Die();
                 }
+            }
+        }
+
+        public string GetPlayerID()
+        {
+            return PlayerID;
+        }
+
+        public void SetPlayerID(string ID)
+        {
+            if (string.IsNullOrEmpty(PlayerID))
+            {
+                PlayerID = ID;
+            }
+            else
+            {
+                Debug.Log("Cannot set a players ID twice!");
             }
         }
 

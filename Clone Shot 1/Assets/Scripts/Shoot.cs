@@ -66,14 +66,11 @@ namespace Assets.Scripts
             }
             else
             {
-                target = other.gameObject.GetComponentInParent<Player>();
+                CloneController cloneTarget = other.gameObject.GetComponentInParent<CloneController>();
                 {
-                    if(target != null)
-                    {
-                        if (target.tag == PLAYER_TAG)
-                        {
-                            CmdPlayerShot(target.GetPlayerID(), Damage);
-                        }
+                    if(cloneTarget != null)
+                    { 
+                        CmdPlayerShot(cloneTarget.GetPlayerID(), Damage);
                     }
                 }
             }

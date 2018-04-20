@@ -28,18 +28,12 @@ namespace Assets.Scripts
                 return;
             }
             StartCoroutine(Life());
-            //https://answers.unity.com/questions/690186/bullet-management-possible-without-rigidbody.html
-
-            Vector3 vectorToTarget = PointToTravelTo - transform.position;
-            float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
-            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * speed);
 
         }
 
         void Update()
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += PointToTravelTo * speed * Time.deltaTime;
         }
 
         IEnumerator Life()

@@ -98,6 +98,8 @@ public class Player : Character
             float YRotation = MainCamera.transform.localEulerAngles.x;
 
             Vector3 point = new Vector3(MainCamera.pixelWidth / 2, MainCamera.pixelHeight / 2, 0);
+            Ray Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            point = Ray.direction;
 
             CmdShoot(point);
 

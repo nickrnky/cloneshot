@@ -15,6 +15,9 @@ namespace Assets.Scripts
         public int Damage = 1;
         public int Lifetime = 10;
 
+        [SerializeField]
+        private RoundManager roundManager;
+
         //public float YRotation = 0;
         public Vector3 PointToTravelTo;
 
@@ -60,11 +63,11 @@ namespace Assets.Scripts
             }
             else
             {
-                CloneController cloneTarget = other.gameObject.GetComponentInParent<CloneController>();
+                NetworkInstanceId cloneTarget = other.gameObject.GetComponentInParent<NetworkIdentity>().netId;
                 {
                     if(cloneTarget != null)
                     { 
-                        CmdPlayerShot(cloneTarget.GetPlayerID(), Damage);
+                        CmdCloneShot(cloneTarget, Damage);
                     }
                 }
             }
@@ -86,6 +89,15 @@ namespace Assets.Scripts
 
             Player _player = GameManager.GetPlayer(_playerID);
             _player.RpcTakeDamage(_damage);
+
+        }
+
+        [Command]
+        void CmdCloneShot(NetworkInstanceId cloneID, int damage)
+        {
+
+            Debug.Log("Clone " + cloneID + " has been shot!");
+            roundManager.CloneHit(cloneID, damage);
 
         }
     }

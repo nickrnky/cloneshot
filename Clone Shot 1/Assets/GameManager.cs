@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     private static int NumberPlayers = 0;
     //private GameObject PlayerOne;
     //private GameObject PlayerTwo;
+    //[SerializeField]
+    //private RoundManager roundManager = new RoundManager();
 
     // Use this for initialization
     void Start () {

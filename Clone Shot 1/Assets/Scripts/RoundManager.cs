@@ -109,7 +109,7 @@ public class RoundManager : NetworkBehaviour {
     IEnumerator StartRound()
     {
         // Position players
-        Debug.Log("round 1");
+        //Debug.Log("round 1");
 
         int count = 0;
         foreach (Player person in players.Values)
@@ -124,9 +124,10 @@ public class RoundManager : NetworkBehaviour {
                 //person.transform.position = PlayerTwoStart;
                 person.RpcRespawn(PlayerTwoStart);
             }
+            count++;
         }
 
-        Debug.Log("round 2");
+        //Debug.Log("round 2");
 
         // Spawn clones
         foreach (GameObject x in TeamOneClones)
@@ -134,14 +135,14 @@ public class RoundManager : NetworkBehaviour {
             ResetClone(x);
             x.SetActive(true);
         }
-        Debug.Log("round 3");
+        //Debug.Log("round 3");
 
         foreach (GameObject x in TeamTwoClones)
         {
             ResetClone(x);
             x.SetActive(true);
         }
-        Debug.Log("round 4");
+        //Debug.Log("round 4");
 
         foreach(Player x in players.Values)
         {
@@ -159,7 +160,7 @@ public class RoundManager : NetworkBehaviour {
             StartClone(x);
         }
 
-        Debug.Log("round 5");
+        //Debug.Log("round 5");
         RoundInProgress = 2;
         yield return null;
     }
@@ -183,7 +184,7 @@ public class RoundManager : NetworkBehaviour {
             else
             {
                 GameObject clone = new GameObject();
-                clone = CreateClone(PlayerOneStart, action);
+                clone = CreateClone(PlayerTwoStart, action);
                 TeamTwoClones.Add(clone);
                 CmdSpawnClone(clone);
             }
@@ -196,7 +197,7 @@ public class RoundManager : NetworkBehaviour {
             //y.PlayerMovement.AllowMovement = true;
         }
 
-        Debug.Log("round 6");
+        //Debug.Log("round 6");
 
         // End
         CurrentRound++;
@@ -245,6 +246,29 @@ public class RoundManager : NetworkBehaviour {
         }
 
         return true;
+    }
+
+    public void CloneHit(NetworkInstanceId CloneID, int damage)
+    {
+        foreach(GameObject clone in TeamOneClones)
+        {
+            if(clone.GetComponent<NetworkIdentity>().netId == CloneID)
+            {
+                clone.GetComponent<CloneController>().CloneTakeDamage(damage);
+                return;
+            }
+        }
+
+        foreach (GameObject clone in TeamTwoClones)
+        {
+            if (clone.GetComponent<NetworkIdentity>().netId == CloneID)
+            {
+                clone.GetComponent<CloneController>().CloneTakeDamage(damage);
+                return;
+            }
+        }
+
+        return;
     }
 
     #region Clone Functions

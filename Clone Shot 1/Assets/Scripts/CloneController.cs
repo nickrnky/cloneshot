@@ -129,6 +129,25 @@ public class CloneController : Character
     }
 
     #endregion Internal Methods
+
+    #region Public methods
+
+    public void CloneTakeDamage(int damage)
+    {
+        CurrentHealth -= damage;
+
+        Damaged = true;
+
+        if (CurrentHealth <= 0)
+        {
+            if (!IsDead)
+            {
+                Die();
+            }
+        }
+    }
+
+    #endregion Public methods
 }
 
 

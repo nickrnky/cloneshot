@@ -138,6 +138,7 @@ namespace Assets.Scripts
         public virtual void Die()
         {
             gameObject.SetActive(false);
+            IsDead = true;
         }
 
         /// <summary>

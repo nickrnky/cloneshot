@@ -15,9 +15,6 @@ namespace Assets.Scripts
         public int Damage = 1;
         public int Lifetime = 10;
 
-        [SerializeField]
-        private RoundManager roundManager;
-
         //public float YRotation = 0;
         public Vector3 PointToTravelTo;
 
@@ -97,7 +94,7 @@ namespace Assets.Scripts
         {
 
             Debug.Log("Clone " + cloneID + " has been shot!");
-            roundManager.CloneHit(cloneID, damage);
+            RoundManager.CloneHit(cloneID, damage);
 
         }
     }

@@ -9,13 +9,13 @@ public class RoundManager : NetworkBehaviour {
     [SerializeField]
     public GameObject ClonePrefab;
 
-    private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    private Dictionary<string, Player> players = new Dictionary<string, Player>();
 
     // Management variables
     private int RoundInProgress = 0;
     private int CurrentRound = 0;
-    private List<GameObject> TeamOneClones = new List<GameObject>();
-    private List<GameObject> TeamTwoClones = new List<GameObject>();
+    private static List<GameObject> TeamOneClones = new List<GameObject>();
+    private static List<GameObject> TeamTwoClones = new List<GameObject>();
 
     [SerializeField]
     GameManager DaManager;
@@ -248,7 +248,7 @@ public class RoundManager : NetworkBehaviour {
         return true;
     }
 
-    public void CloneHit(NetworkInstanceId CloneID, int damage)
+    public static void CloneHit(NetworkInstanceId CloneID, int damage)
     {
         foreach(GameObject clone in TeamOneClones)
         {

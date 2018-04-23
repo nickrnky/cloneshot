@@ -138,6 +138,8 @@ public class Player : Character
         this.transform.position = location;
         PlayerMovement.AllowMovement = true;
         ActionsInRound = new PlayersActionsInRound();
+
+        CurrentFrameNumber = 0;
     }
 
 

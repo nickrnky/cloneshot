@@ -119,9 +119,9 @@ namespace Assets.Scripts
         /// Sends a shoot command originating from the player
         /// </summary>
         [Command]
-        public void CmdShoot(Vector3 PointToTravelTo)
+        public void CmdShoot(Vector3 PointToTravelTo, Vector3 StartingPoint)
         {
-            GameObject _gunshot = (GameObject)Instantiate(bulletPrefab, transform.TransformPoint(0,.7f,1.5f), transform.rotation);
+            GameObject _gunshot = (GameObject)Instantiate(bulletPrefab, StartingPoint, transform.rotation);
             Shoot ShootScript = _gunshot.GetComponent<Shoot>();
 
             if(ShootScript != null)

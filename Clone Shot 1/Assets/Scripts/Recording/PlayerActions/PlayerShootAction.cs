@@ -12,6 +12,7 @@ namespace Assets.Scripts.Recording.PlayerActions
     internal class PlayerShootAction : PlayerAction
     {
         private Vector3 PointToTravelTo;
+        private Vector3 StartingPoint;
 
         #region Constructor
 
@@ -19,11 +20,12 @@ namespace Assets.Scripts.Recording.PlayerActions
         /// The frame number represents when the action took place
         /// </summary>
         /// <param name="frameNumber"></param>
-        public PlayerShootAction(int frameNumber, Vector3 pointToTravelTo)
+        public PlayerShootAction(int frameNumber, Vector3 pointToTravelTo, Vector3 startingPoint)
             : base(frameNumber)
         {
             ActionType = PlayerActions.Shoot;
             PointToTravelTo = pointToTravelTo;
+            StartingPoint = startingPoint;
         }
 
         #endregion Constructor
@@ -39,7 +41,7 @@ namespace Assets.Scripts.Recording.PlayerActions
             Character Player = Object.GetComponent<Character>();
             if (Player != null)
             {
-                Player.CmdShoot(PointToTravelTo);
+                Player.CmdShoot(PointToTravelTo, StartingPoint);
             }
         }
 

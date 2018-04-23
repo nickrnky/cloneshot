@@ -48,6 +48,9 @@ public class Player : Character
     private Vector3 PreviousMovement;
     private Quaternion PreviousRotation;
 
+    [SerializeField]
+    public GameObject ShootingZone;
+
 
     #endregion Properties
 
@@ -101,9 +104,19 @@ public class Player : Character
             Ray Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             point = Ray.direction;
 
-            CmdShoot(point);
+            Vector3 StartingPoint;
+            if(ShootingZone != null)
+            {
+                StartingPoint = ShootingZone.transform.position;
+            }
+            else
+            {
+                StartingPoint = gameObject.transform.position;
+            }
 
-            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber, point));
+            CmdShoot(point, StartingPoint);
+
+            ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber, point, StartingPoint));
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && !IsJumping)

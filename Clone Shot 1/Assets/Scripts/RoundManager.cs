@@ -28,6 +28,7 @@ public class RoundManager : NetworkBehaviour {
 
     // Configurable variables
     public int NumberOfRounds = 5;
+    public float TimeBetweenRounds = 5.0f;
     Vector3 PlayerOneStart = new Vector3();
     Vector3 PlayerTwoStart = new Vector3();
 
@@ -110,6 +111,10 @@ public class RoundManager : NetworkBehaviour {
     {
         // Position players
         //Debug.Log("round 1");
+
+        Debug.Log("Ready?");
+        yield return new WaitForSeconds(TimeBetweenRounds);
+        Debug.Log("Go!!!");
 
         int count = 0;
         foreach (Player person in players.Values)

@@ -3,7 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 using Assets.Scripts.Recording;
 using Assets.Scripts.Recording.PlayerActions;
 using Assets.Scripts;
@@ -129,15 +129,6 @@ public class Player : Character
             CmdShoot(point, StartingPoint);
 
             ActionsInRound.AddAction(new PlayerShootAction(CurrentFrameNumber, point, StartingPoint));
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space) && !IsJumping)
-        {
-            IsJumping = true;
-            Vector3 forceOfJump = transform.up * JumpForce;
-            Jump(forceOfJump);
-            ActionsInRound.AddAction(new PlayerJumpAction(forceOfJump, CurrentFrameNumber));
-
         }
         else if(GroundCheck != null)
         {

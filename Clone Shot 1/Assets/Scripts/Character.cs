@@ -137,7 +137,7 @@ namespace Assets.Scripts
         /// </summary>
         public virtual void Die()
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         /// <summary>

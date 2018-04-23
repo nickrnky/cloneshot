@@ -45,6 +45,7 @@ namespace Assets.Scripts
         //[Command]
         void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Trigger Entered");
             if (!isServer)
             {
                 return;
@@ -66,11 +67,10 @@ namespace Assets.Scripts
             else
             {
                 NetworkInstanceId cloneTarget = other.gameObject.GetComponentInParent<NetworkIdentity>().netId;
-                {
-                    if(cloneTarget != null)
-                    { 
-                        CmdCloneShot(cloneTarget, Damage);
-                    }
+                
+                if(cloneTarget != null)
+                { 
+                    CmdCloneShot(cloneTarget, Damage);
                 }
             }
 

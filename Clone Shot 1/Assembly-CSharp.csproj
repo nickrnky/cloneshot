@@ -60,8 +60,11 @@
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerTurnAction.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayersActionsInRound.cs" />
      <Compile Include="Assets\Scripts\RoundManager.cs" />
+     <Compile Include="Assets\Scripts\RoundManagerClasses\KillStreakBufferInstance.cs" />
+     <Compile Include="Assets\Scripts\RoundManagerClasses\KillStreakHandler.cs" />
      <Compile Include="Assets\Scripts\Shoot.cs" />
-     <Compile Include="Assets\Scripts\SoundController.cs" />
+     <Compile Include="Assets\Scripts\SoundController\SoundController.cs" />
+     <Compile Include="Assets\Scripts\SoundController\SoundControllerInstance.cs" />
      <Compile Include="Assets\Scripts\SoundEffectManager.cs" />
      <Compile Include="Assets\detectCollision.cs" />
  <Reference Include="UnityEngine.UI">

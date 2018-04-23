@@ -80,8 +80,8 @@ namespace Assets.Scripts
 
         internal Rigidbody SelfRigidBody;
 
-
-
+        public Teams Team { get; set; }
+        
         #endregion Properties
 
         #region Unity Events
@@ -185,6 +185,11 @@ namespace Assets.Scripts
             {
                 Debug.Log("Cannot set a players ID twice!");
             }
+        }
+
+        public virtual void SetTeam(Teams team)
+        {
+            Team = team;
         }
 
         #endregion Public Functions

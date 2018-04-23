@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+public enum Teams { Red, Blue};
+
 public class RoundManager : NetworkBehaviour {
 
     [SerializeField]

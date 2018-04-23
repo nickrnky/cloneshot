@@ -147,6 +147,12 @@ public class CloneController : Character
         }
     }
 
+
+    public override void SetTeam(Teams team)
+    {
+        Team = team;
+
+    }
     #endregion Public methods
 }
 

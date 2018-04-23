@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GameManager.cs" />
-     <Compile Include="Assets\Scripts\BackgroundMusicPlayer.cs" />
      <Compile Include="Assets\Scripts\Character.cs" />
      <Compile Include="Assets\Scripts\CloneController.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\FPSInput.cs" />
@@ -62,6 +61,8 @@
      <Compile Include="Assets\Scripts\Recording\PlayersActionsInRound.cs" />
      <Compile Include="Assets\Scripts\RoundManager.cs" />
      <Compile Include="Assets\Scripts\Shoot.cs" />
+     <Compile Include="Assets\Scripts\SoundController.cs" />
+     <Compile Include="Assets\Scripts\SoundEffectManager.cs" />
      <Compile Include="Assets\detectCollision.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

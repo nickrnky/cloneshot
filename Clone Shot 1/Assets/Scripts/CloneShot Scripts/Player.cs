@@ -70,6 +70,9 @@ public class Player : Character
         PreviousRotation = new Quaternion();
         PreviousMovement = transform.position;
         PreviousRotation = transform.rotation;
+
+        SoundController controll = GetComponentInParent<SoundController>();
+        controll.LaunchTestAllSoundsCouritine();
     }
 
     /// <summary>

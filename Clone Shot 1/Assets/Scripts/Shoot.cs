@@ -51,6 +51,11 @@ namespace Assets.Scripts
             }
 
             Player target = other.gameObject.GetComponent<Player>();
+            if(target == null)
+            {
+                target = other.gameObject.GetComponentInParent<Player>();
+            }
+
             if (target != null)
             {
                 if (target.tag == PLAYER_TAG)

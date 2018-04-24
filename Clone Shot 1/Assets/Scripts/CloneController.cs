@@ -98,6 +98,11 @@ public class CloneController : Character
 
                 AIMove();
 
+                if(Random.Range(0, 100) > 95)
+                {
+                    AITurn();
+                }
+
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
                 if (Physics.SphereCast(ray, 0.75f, out hit))

@@ -10,10 +10,12 @@ namespace Assets.Scripts
 {
 
     [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(AudioSource))]
     public class Character : NetworkBehaviour
     {
         #region Properties
 
+        private AudioSource Audio;
 
         [SerializeField]
         public GameObject bulletPrefab;
@@ -99,6 +101,7 @@ namespace Assets.Scripts
         /// </summary>
         void Start()
         {
+            Audio = GetComponent<AudioSource>();
             IsJumping = false;
             IsDead = false;
             Damaged = false;
@@ -184,6 +187,28 @@ namespace Assets.Scripts
                     Die();
                 }
             }
+
+            PlayDamageTakenSound();
+        }
+
+        [ClientRpc]
+        public void PlayDamageTakenSound()
+        {
+            AudioClip clip = new AudioClip();
+            switch (UnityEngine.Random.Range(0, 2))
+            {
+                case 0:
+                    clip = SoundEffectManager.GetClip(SoundEffects.Ahhh);
+                    break;
+                case 1:
+                    clip = SoundEffectManager.GetClip(SoundEffects.Owww);
+                    break;
+                case 2:
+                    clip = SoundEffectManager.GetClip(SoundEffects.MyLeg);
+                    break;
+
+            }
+            Audio.PlayOneShot(clip);
         }
 
         public string GetPlayerID()

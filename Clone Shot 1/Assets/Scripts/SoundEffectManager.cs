@@ -6,6 +6,7 @@ using UnityEngine;
 public enum SoundEffects
 {
     Assist,
+    Ahhh,
     BlueLead,
     Defense,
     Denied,
@@ -22,12 +23,15 @@ public enum SoundEffects
     KillingSpree,
     MonsterKill,
     MultiKill,
+    MyLeg,
     One,
     OneMinute,
+    Owww,
     Perfect,
     PlasmaShot,
     Rampage,
     RedLead,
+    RoundOver,
     SuddenDeath,
     TeamsAreTied,
     Three,
@@ -48,6 +52,9 @@ public static class SoundEffectManager
         {
             switch (SoundEffect)
             {
+                case SoundEffects.Ahhh:
+                    newClip = Resources.Load<AudioClip>("Sound Effects/Ahhh");
+                    break;
                 case SoundEffects.Assist:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Assist");
                     break;
@@ -99,8 +106,14 @@ public static class SoundEffectManager
                 case SoundEffects.MultiKill:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Multikill");
                     break;
+                case SoundEffects.MyLeg:
+                    newClip = Resources.Load<AudioClip>("Sound Effects/My leg");
+                    break;
                 case SoundEffects.One:
                     newClip = Resources.Load<AudioClip>("Sound Effects/One");
+                    break;
+                case SoundEffects.Owww:
+                    newClip = Resources.Load<AudioClip>("Sound Effects/Owww");
                     break;
                 case SoundEffects.OneMinute:
                     newClip = Resources.Load<AudioClip>("Sound Effects/One minute warning");
@@ -116,6 +129,9 @@ public static class SoundEffectManager
                     break;
                 case SoundEffects.RedLead:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Red lead");
+                    break;
+                case SoundEffects.RoundOver:
+                    newClip = Resources.Load<AudioClip>("Sound Effects/Round Over");
                     break;
                 case SoundEffects.SuddenDeath:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Sudden Death");
@@ -144,6 +160,7 @@ public static class SoundEffectManager
                 case SoundEffects.YouHaveTakenTheLead:
                     newClip = Resources.Load<AudioClip>("Sound Effects/You have taken the lead");
                     break;
+                
             }
         }
         catch(Exception e)

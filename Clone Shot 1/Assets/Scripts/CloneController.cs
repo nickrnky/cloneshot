@@ -282,6 +282,8 @@ public class CloneController : Character
                 Die();
             }
         }
+
+        PlayDamageTakenSound();
     }
 
     public void SetBoundsCheck(Collider Bounds)

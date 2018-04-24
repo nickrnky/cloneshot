@@ -227,6 +227,10 @@ public class RoundManager : NetworkBehaviour
     IEnumerator PostProcessing()
     {
 
+        foreach(Player player in players.Values)
+        {
+            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.RoundOver);
+        }
         // Clean up and get recording
         foreach (Player player in players.Values)
         {

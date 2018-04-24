@@ -158,6 +158,7 @@ namespace Assets.Scripts
         {
             gameObject.SetActive(false);
             IsDead = true;
+            PlayDeathSound();
         }
 
         /// <summary>
@@ -195,15 +196,23 @@ namespace Assets.Scripts
         public void PlayDamageTakenSound()
         {
             AudioClip clip = new AudioClip();
-            switch (UnityEngine.Random.Range(0, 2))
+
+            clip = SoundEffectManager.GetClip(SoundEffects.Owww);
+            
+            Audio.PlayOneShot(clip);
+        }
+
+        [ClientRpc]
+        public void PlayDeathSound()
+        {
+
+            AudioClip clip = new AudioClip();
+            switch (UnityEngine.Random.Range(0, 1))
             {
                 case 0:
                     clip = SoundEffectManager.GetClip(SoundEffects.Ahhh);
                     break;
                 case 1:
-                    clip = SoundEffectManager.GetClip(SoundEffects.Owww);
-                    break;
-                case 2:
                     clip = SoundEffectManager.GetClip(SoundEffects.MyLeg);
                     break;
 

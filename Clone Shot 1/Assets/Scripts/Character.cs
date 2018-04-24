@@ -158,7 +158,7 @@ namespace Assets.Scripts
         {
             gameObject.SetActive(false);
             IsDead = true;
-            PlayDeathSound();
+            RpcPlayDeathSound();
         }
 
         /// <summary>
@@ -189,11 +189,11 @@ namespace Assets.Scripts
                 }
             }
 
-            PlayDamageTakenSound();
+            RpcPlayDamageTakenSound();
         }
 
         [ClientRpc]
-        public void PlayDamageTakenSound()
+        public void RpcPlayDamageTakenSound()
         {
             AudioClip clip = new AudioClip();
 
@@ -203,7 +203,7 @@ namespace Assets.Scripts
         }
 
         [ClientRpc]
-        public void PlayDeathSound()
+        public void RpcPlayDeathSound()
         {
 
             AudioClip clip = new AudioClip();

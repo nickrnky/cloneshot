@@ -283,7 +283,7 @@ public class CloneController : Character
             }
         }
 
-        PlayDamageTakenSound();
+        RpcPlayDamageTakenSound();
     }
 
     public void SetBoundsCheck(Collider Bounds)

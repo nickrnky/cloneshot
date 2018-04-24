@@ -144,10 +144,12 @@ public class Player : Character
     [ClientRpc]
     public void RpcPlaySound(Assets.Scripts.SoundController.PlayMode Mode, SoundEffects SoundEffect)
     {
-        Debug.Log(SoundEffect);
-        if(SoundManager != null)
+        if (isLocalPlayer)
         {
-            SoundManager.ProcessSoundEffect(Mode, SoundEffect);
+            if (SoundManager != null)
+            {
+                SoundManager.ProcessSoundEffect(Mode, SoundEffect);
+            }
         }
     }
 

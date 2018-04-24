@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class CloneController : Character
 {
     #region Properties
@@ -17,7 +18,9 @@ public class CloneController : Character
     /// Represents the actions that should be performed on the current frame.
     /// </summary>
     private List<PlayerAction> CurrentRoundActions;
-    
+
+    private CharacterController _charController;
+
     /// <summary>
     /// Controls whether or not the controller should be performing actions. Controlled by the start and stop functions.
     /// </summary>
@@ -28,6 +31,9 @@ public class CloneController : Character
 
     [SerializeField]
     public int Speed = 10;
+    public float gravity = -9.8f;
+    public float jump_speed = 5.0f;
+    public float FallingSpeed = 0;
 
     /// <summary>
     /// The point that the clone should start its actions at.
@@ -47,6 +53,8 @@ public class CloneController : Character
         CurrentFrameNumber = 0;
 
         CurrentRoundActions = new List<PlayerAction>();
+
+        _charController = GetComponent<CharacterController>();
     }
 
     /// <summary>
@@ -85,7 +93,8 @@ public class CloneController : Character
             else
             {
                 Debug.Log("Clone Finished Reading");
-                transform.Translate(0, -9.8f * Time.deltaTime, Speed * Time.deltaTime);
+
+                AIMove();
 
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
@@ -95,37 +104,11 @@ public class CloneController : Character
                     Player HitPlayer = hitObject.GetComponent<Player>();
                     if (HitPlayer != null && HitPlayer.Team != Team)
                     {
-                        if (FireSound != null)
-                        {
-                            FireSound.Play();
-                        }
-
-                        Vector3 point = gameObject.transform.forward;
-
-                        Vector3 StartingPoint;
-                        if (ShootingZone != null)
-                        {
-                            StartingPoint = ShootingZone.transform.position;
-                        }
-                        else
-                        {
-                            StartingPoint = gameObject.transform.position;
-                        }
-
-                        CmdShoot(point, StartingPoint);
+                        AIShoot();
                     }
                     else if (hit.distance < ObstacleRange)
                     {
-                        float angle = Random.Range(-110, 110);
-                        transform.Rotate(0, angle, 0);
-                    }
-                }
-                else
-                {
-                    int JumpChance = Random.Range(0, 10);
-                    if(JumpChance > 7)
-                    {
-
+                        AITurn();
                     }
                 }
             }
@@ -191,6 +174,62 @@ public class CloneController : Character
     #endregion Internal Methods
 
     #region Public methods
+
+    private void AIMove()
+    {
+        
+        float deltaX = Random.Range(0f, Speed);
+        float deltaZ = Random.Range(0f, Speed);
+
+        Vector3 movement = new Vector3(deltaX, 0, deltaZ);
+
+        movement = Vector3.ClampMagnitude(movement, Speed);
+
+        if (Random.Range(0,100) > 90)
+        {
+            FallingSpeed = jump_speed;
+        }
+
+        FallingSpeed = gravity * Time.deltaTime + FallingSpeed;
+        movement.y = FallingSpeed;
+
+        movement *= Time.deltaTime;
+        movement = transform.TransformDirection(movement);
+        _charController.Move(movement);
+
+        if (_charController.isGrounded)
+        {
+            FallingSpeed = 0;
+        }
+    }
+
+    private void AIShoot()
+    {
+        if (FireSound != null)
+        {
+            FireSound.Play();
+        }
+
+        Vector3 point = gameObject.transform.forward;
+
+        Vector3 StartingPoint;
+        if (ShootingZone != null)
+        {
+            StartingPoint = ShootingZone.transform.position;
+        }
+        else
+        {
+            StartingPoint = gameObject.transform.position;
+        }
+
+        CmdShoot(point, StartingPoint);
+    }
+
+    private void AITurn()
+    {
+        float angle = Random.Range(-110, 110);
+        transform.Rotate(0, angle, 0);
+    }
 
     public void CloneTakeDamage(int damage)
     {

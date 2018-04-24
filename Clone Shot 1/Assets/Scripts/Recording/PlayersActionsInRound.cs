@@ -74,10 +74,11 @@ namespace Assets.Scripts.Recording
         /// <returns></returns>
         internal List<PlayerAction> GetPlayerActionsForNextFrame()
         {
-            Debug.Log("Curent Index: " + CurrentIndex + "Max Index: " + (Actions.Count - 1));
             FrameNumber++;
-            if(Actions.Count <= CurrentIndex)
+            Debug.Log("Actions Count: " + Actions.Count + ", Current Index: " + CurrentIndex);
+            if(Actions.Count <= CurrentIndex + 1)
             {
+                Debug.Log("Finished Reading!");
                 FinishedReading = true;
                 return null;
             }

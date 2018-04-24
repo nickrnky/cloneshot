@@ -102,9 +102,7 @@ public class Player : Character
         if (Input.GetMouseButtonDown(0) && isLocalPlayer)
         {
             SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.PlasmaShot);
-
-            float YRotation = MainCamera.transform.localEulerAngles.x;
-
+            
             Vector3 point = new Vector3(MainCamera.pixelWidth / 2, MainCamera.pixelHeight / 2, 0);
             Ray Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
             point = Ray.direction;

@@ -108,12 +108,12 @@ public class CloneController : Character
                 if (Physics.SphereCast(ray, 0.75f, out hit))
                 {
                     GameObject hitObject = hit.transform.gameObject;
-                    Player HitPlayer = hitObject.GetComponent<Player>();
+                    Character HitPlayer = hitObject.GetComponent<Character>();
                     if (HitPlayer != null && HitPlayer.Team != Team)
                     {
                         AIShoot();
                     }
-                    else if(hitObject.GetComponentInParent<Player>() != null)
+                    else if(hitObject.GetComponentInParent<Character>() != null)
                     {
                         AIShoot();
                     }

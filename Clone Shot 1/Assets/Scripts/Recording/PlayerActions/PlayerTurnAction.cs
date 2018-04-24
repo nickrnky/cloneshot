@@ -45,10 +45,7 @@ namespace Assets.Scripts.Recording.PlayerActions
         /// <param name="Object"></param>
         public override void PerformActionOnObject(GameObject Object)
         {
-            if (Rotation != null)
-            {
-                Object.transform.rotation = Rotation;
-            }
+            Object.transform.rotation = Rotation;
         }
 
         #endregion Public Functions

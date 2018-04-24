@@ -228,7 +228,6 @@ public class RoundManager : NetworkBehaviour
     {
 
         // Clean up and get recording
-        int count = 0;
         foreach (Player player in players.Values)
         {
             PlayersActionsInRound action = new PlayersActionsInRound();
@@ -365,7 +364,7 @@ public class RoundManager : NetworkBehaviour
     /// <returns></returns>
     private GameObject CreateClone(Vector3 StartingPosition, PlayersActionsInRound ActionReader, Teams Team)
     {
-        if (StartingPosition == null || ActionReader == null)
+        if (ActionReader == null)
         {
             Debug.Log("Cannot pass in a null starting position or action reader when creating a clone");
             return null;

@@ -10,8 +10,7 @@ namespace Assets.Scripts.RoundManagerClasses
     {
         private int Streak = 0;
         private Teams TeamWithLastKill = Teams.None;
-
-        private int PreviousNumberBlueTeamAlive, PreviousNumberRedTeamAlive;
+        
         private int NumberBlueTeamAlive, NumberRedTeamAlive;
 
         private List<KillStreakBufferInstance> KillStreakBuffer = new List<KillStreakBufferInstance>();
@@ -27,14 +26,12 @@ namespace Assets.Scripts.RoundManagerClasses
             if(NumberBlueTeamAlive != NumberOfBlueTeamAlive)
             {
                 BlueTeamDifference = NumberBlueTeamAlive - NumberOfBlueTeamAlive;
-                PreviousNumberBlueTeamAlive = NumberBlueTeamAlive;
                 NumberBlueTeamAlive = NumberOfBlueTeamAlive;
             }
 
             if(NumberRedTeamAlive != NumberOfRedTeamAlive)
             {
                 RedTeamDifference = NumberRedTeamAlive - NumberOfRedTeamAlive;
-                PreviousNumberRedTeamAlive = NumberRedTeamAlive;
                 NumberRedTeamAlive = NumberOfRedTeamAlive;
             }
 

@@ -67,11 +67,8 @@ namespace Assets.Scripts
             else
             {
                 NetworkInstanceId cloneTarget = other.gameObject.GetComponentInParent<NetworkIdentity>().netId;
-                
-                if(cloneTarget != null)
-                { 
-                    CmdCloneShot(cloneTarget, Damage);
-                }
+
+                CmdCloneShot(cloneTarget, Damage);
             }
 
             CmdDestroy();

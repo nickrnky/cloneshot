@@ -47,10 +47,7 @@ namespace Assets.Scripts.Recording.PlayerActions
         /// <param name="Object"></param>
         public override void PerformActionOnObject(GameObject Object)
         {
-            if (Position != null)
-            {
-                Object.transform.position = Position;
-            }
+            Object.transform.position = Position;
         }
 
         #endregion Public Functions

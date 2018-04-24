@@ -98,7 +98,7 @@ public class CloneController : Character
 
                 AIMove();
 
-                if(Random.Range(0, 100) > 95)
+                if(Random.Range(0, 100) == 1)
                 {
                     AITurn();
                 }
@@ -191,7 +191,7 @@ public class CloneController : Character
 
         movement = Vector3.ClampMagnitude(movement, Speed);
 
-        if (Random.Range(0, 100) > 90)
+        if (Random.Range(0, 500) == 1)
         {
             FallingSpeed = jump_speed;
         }

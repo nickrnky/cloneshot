@@ -11,6 +11,9 @@ public class RoundManager : NetworkBehaviour
 {
 
     [SerializeField]
+    public GameObject BoundsCheck;
+
+    [SerializeField]
     public GameObject ClonePrefab;
 
     private Dictionary<string, Player> players = new Dictionary<string, Player>();
@@ -55,7 +58,13 @@ public class RoundManager : NetworkBehaviour
         StageInProgress = 0;
         BluePlayerStart = SpawnerBlue.transform.position;
         RedPlayerStart = SpawnerRed.transform.position;
+        
+        Collider BoundsCheckCollider = BoundsCheck.GetComponent<Collider>();
+        Vector3 MinPoint = BoundsCheckCollider.bounds.min;
+        Vector3 MaxPoint = BoundsCheckCollider.bounds.max;
 
+        Debug.Log("Min Point X: " + MinPoint.x + ", Y: " + MinPoint.y + ", Z: " + MinPoint.z);
+        Debug.Log("Min Point X: " + MaxPoint.x + ", Y: " + MaxPoint.y + ", Z: " + MaxPoint.z);
     }
 	
 	// Update is called once per frame
@@ -386,6 +395,14 @@ public class RoundManager : NetworkBehaviour
 
         Controller.SetStartingPosition(StartingPosition);
         Controller.SetActionReader(ActionReader);
+        if (BoundsCheck != null)
+        {
+            Controller.SetBoundsCheck(BoundsCheck.GetComponent<Collider>());
+        }
+        else
+        {
+            Debug.Log("RoundManager doesn't have a set bounds check!");
+        }
 
         Controller.Team = Team;
 

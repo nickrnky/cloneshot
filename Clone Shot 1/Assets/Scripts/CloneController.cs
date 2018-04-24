@@ -14,6 +14,8 @@ public class CloneController : Character
     /// </summary>
     private PlayersActionsInRound Actions;
 
+    private float MinX, MinY, MinZ, MaxX, MaxY, MaxZ;
+
     /// <summary>
     /// Represents the actions that should be performed on the current frame.
     /// </summary>
@@ -177,15 +179,14 @@ public class CloneController : Character
 
     private void AIMove()
     {
-        
         float deltaX = Random.Range(0f, Speed);
         float deltaZ = Random.Range(0f, Speed);
-
+        
         Vector3 movement = new Vector3(deltaX, 0, deltaZ);
 
         movement = Vector3.ClampMagnitude(movement, Speed);
 
-        if (Random.Range(0,100) > 90)
+        if (Random.Range(0, 100) > 90)
         {
             FallingSpeed = jump_speed;
         }
@@ -195,6 +196,34 @@ public class CloneController : Character
 
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
+
+
+        if (transform.position.y < MinY)
+        {
+            movement.y = jump_speed;
+        }
+        else if (transform.position.y > MaxY)
+        {
+            movement.y = gravity * Time.deltaTime + gravity;
+        }
+
+        if (transform.position.x < MinX)
+        {
+            movement.x = Speed * Time.deltaTime;
+        }
+        else if (transform.position.x > MaxX)
+        {
+            movement.x = Speed * -1 * Time.deltaTime;
+        }
+        if (transform.position.z < MinZ)
+        {
+            movement.z = Speed * Time.deltaTime;
+        }
+        else if (transform.position.z > MaxZ)
+        {
+            movement.z = Speed * -1 * Time.deltaTime;
+        }
+
         _charController.Move(movement);
 
         if (_charController.isGrounded)
@@ -246,6 +275,19 @@ public class CloneController : Character
         }
     }
 
+    public void SetBoundsCheck(Collider Bounds)
+    {
+        Vector3 MinPoint = Bounds.bounds.min;
+        Vector3 MaxPoint = Bounds.bounds.max;
+
+        MinX = MinPoint.x;
+        MinY = MinPoint.y;
+        MinZ = MinPoint.z;
+
+        MaxX = MaxPoint.x;
+        MaxY = MaxPoint.y;
+        MaxZ = MaxPoint.z;
+    }
 
     public override void SetTeam(Teams team)
     {

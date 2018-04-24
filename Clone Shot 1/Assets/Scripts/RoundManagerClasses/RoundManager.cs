@@ -130,6 +130,21 @@ public class RoundManager : NetworkBehaviour
         Debug.Log("Go!!!");
 
         int count = 0;
+
+        int pNum = 0;
+        foreach(Player player in players.Values)
+        {
+            if(pNum == 0)
+            {
+                player.Team = Teams.Blue;
+            }
+            else
+            {
+                player.Team = Teams.Red;
+            }
+            pNum++;
+        }
+
         foreach (Player person in players.Values)
         {
             person.IsDead = false;

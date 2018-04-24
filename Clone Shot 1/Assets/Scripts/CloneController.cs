@@ -61,6 +61,7 @@ public class CloneController : Character
         }
         if (DoActions)
         {
+            #region If the clone has prerocorded actions to take
             if (!Actions.FinishedReading)
             {
                 CurrentFrameNumber++;
@@ -78,9 +79,13 @@ public class CloneController : Character
                     }
                 }
             }
+            #endregion If the clone has prerocorded actions to take
+
+            #region AI actions
             else
             {
-                transform.Translate(0, 0, Speed * Time.deltaTime);
+                Debug.Log("Clone Finished Reading");
+                transform.Translate(0, -9.8f * Time.deltaTime, Speed * Time.deltaTime);
 
                 Ray ray = new Ray(transform.position, transform.forward);
                 RaycastHit hit;
@@ -124,6 +129,7 @@ public class CloneController : Character
                     }
                 }
             }
+            #endregion AI actions
         }
     }
 

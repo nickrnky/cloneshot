@@ -32,7 +32,7 @@ public class RoundManager : NetworkBehaviour
 
     // Configurable variables
     public int NumberOfRounds = 5;
-    public float TimeBetweenRounds = 5.0f;
+    public float TimeBetweenRounds = 6.0f;
     Vector3 BluePlayerStart = new Vector3();
     Vector3 RedPlayerStart = new Vector3();
 
@@ -99,13 +99,12 @@ public class RoundManager : NetworkBehaviour
                     Debug.Log("No longer fighting");
                 }
 
-                Debug.Log("Updating Kill Steaks");
                 bool KillStreakUpdated = KillStreakManager.UpdateKillStreakReturnTrueIfBufferChanged(NumberOfBlueTeamAlive, NumberOfRedTeamAlive);
-                if(KillStreakUpdated)
+                if (KillStreakUpdated)
                 {
-                    Debug.Log("Loading Kill Streaks");
                     ProcessKillStreakBuffer();
                 }
+                
             }
             FrameCounter++;
         }

@@ -74,6 +74,7 @@ namespace Assets.Scripts.Recording
         /// <returns></returns>
         internal List<PlayerAction> GetPlayerActionsForNextFrame()
         {
+            Debug.Log("Curent Index: " + CurrentIndex + "Max Index: " + (Actions.Count - 1));
             FrameNumber++;
             if(Actions.Count <= CurrentIndex)
             {

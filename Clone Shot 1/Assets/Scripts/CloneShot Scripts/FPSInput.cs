@@ -34,7 +34,8 @@ public class FPSInput : MonoBehaviour {
             float deltaZ = Input.GetAxis("Vertical") * speed;
             Vector3 movement = new Vector3(deltaX, 0, deltaZ);
             movement = Vector3.ClampMagnitude(movement, speed);
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
                 falling_speed = jump_speed;
             }
 

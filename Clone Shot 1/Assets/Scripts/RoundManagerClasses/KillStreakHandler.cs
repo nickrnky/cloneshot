@@ -84,8 +84,6 @@ namespace Assets.Scripts.RoundManagerClasses
                 }
             }
 
-            UnityEngine.Debug.Log("Red: " + RedTeamDifference + ", Blue: " + BlueTeamDifference + ", Streak: " + Streak);
-
             #endregion Update Information
 
             Random r = new Random();

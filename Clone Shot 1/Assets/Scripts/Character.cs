@@ -140,6 +140,14 @@ namespace Assets.Scripts
             NetworkServer.Spawn(_gunshot);
         }
 
+        [Command]
+        public void CmdDie()
+        {
+            this.IsDead = true;
+            CurrentHealth = 0;
+            Die();
+        }
+
         /// <summary>
         /// Kills the player
         /// </summary>

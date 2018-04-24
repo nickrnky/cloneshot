@@ -58,13 +58,6 @@ public class RoundManager : NetworkBehaviour
         StageInProgress = 0;
         BluePlayerStart = SpawnerBlue.transform.position;
         RedPlayerStart = SpawnerRed.transform.position;
-        
-        Collider BoundsCheckCollider = BoundsCheck.GetComponent<Collider>();
-        Vector3 MinPoint = BoundsCheckCollider.bounds.min;
-        Vector3 MaxPoint = BoundsCheckCollider.bounds.max;
-
-        Debug.Log("Min Point X: " + MinPoint.x + ", Y: " + MinPoint.y + ", Z: " + MinPoint.z);
-        Debug.Log("Min Point X: " + MaxPoint.x + ", Y: " + MaxPoint.y + ", Z: " + MaxPoint.z);
     }
 	
 	// Update is called once per frame
@@ -107,13 +100,14 @@ public class RoundManager : NetworkBehaviour
                     StageInProgress = 3;
                     Debug.Log("No longer fighting");
                 }
-
-                bool KillStreakUpdated = KillStreakManager.UpdateKillStreakReturnTrueIfBufferChanged(NumberOfBlueTeamAlive, NumberOfRedTeamAlive);
-                if (KillStreakUpdated)
+                else
                 {
-                    ProcessKillStreakBuffer();
+                    bool KillStreakUpdated = KillStreakManager.UpdateKillStreakReturnTrueIfBufferChanged(NumberOfBlueTeamAlive, NumberOfRedTeamAlive);
+                    if (KillStreakUpdated)
+                    {
+                        ProcessKillStreakBuffer();
+                    }
                 }
-                
             }
             FrameCounter++;
         }

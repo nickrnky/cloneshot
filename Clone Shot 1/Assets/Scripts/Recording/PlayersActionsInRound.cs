@@ -75,7 +75,6 @@ namespace Assets.Scripts.Recording
         internal List<PlayerAction> GetPlayerActionsForNextFrame()
         {
             FrameNumber++;
-            Debug.Log("Actions Count: " + Actions.Count + ", Current Index: " + CurrentIndex);
             if(Actions.Count <= CurrentIndex + 1)
             {
                 Debug.Log("Finished Reading!");

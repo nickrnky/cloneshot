@@ -9,7 +9,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SoundController : MonoBehaviour
 {
-
     // Use this for initialization
     public int MaxAudioDistance { get; set; }
 
@@ -84,9 +83,7 @@ public class SoundController : MonoBehaviour
     {
         if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Immediate || Instance.Mode == Assets.Scripts.SoundController.PlayMode.Block)
         {
-            AudioSource source = new AudioSource();
-            source.clip = Instance.Clip;
-            source.Play();
+            BlockedAudioSource.PlayOneShot(Instance.Clip);
         }
 
         if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Block)

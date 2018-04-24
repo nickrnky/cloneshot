@@ -101,10 +101,7 @@ public class Player : Character
         }
         if (Input.GetMouseButtonDown(0) && isLocalPlayer)
         {
-            if (FireSound != null)
-            {
-                FireSound.Play();
-            }
+            SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.PlasmaShot);
 
             float YRotation = MainCamera.transform.localEulerAngles.x;
 
@@ -147,6 +144,7 @@ public class Player : Character
     [ClientRpc]
     public void RpcPlaySound(Assets.Scripts.SoundController.PlayMode Mode, SoundEffects SoundEffect)
     {
+        Debug.Log(SoundEffect);
         if(SoundManager != null)
         {
             SoundManager.ProcessSoundEffect(Mode, SoundEffect);

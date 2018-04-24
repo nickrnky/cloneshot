@@ -25,6 +25,7 @@ public enum SoundEffects
     One,
     OneMinute,
     Perfect,
+    PlasmaShot,
     Rampage,
     RedLead,
     SuddenDeath,
@@ -103,6 +104,9 @@ public static class SoundEffectManager
                     break;
                 case SoundEffects.OneMinute:
                     newClip = Resources.Load<AudioClip>("Sound Effects/One minute warning");
+                    break;
+                case SoundEffects.PlasmaShot:
+                    newClip = Resources.Load<AudioClip>("Sound Effects/dspistol");
                     break;
                 case SoundEffects.Perfect:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Perfect");

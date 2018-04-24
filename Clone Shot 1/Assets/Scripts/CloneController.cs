@@ -113,6 +113,10 @@ public class CloneController : Character
                     {
                         AIShoot();
                     }
+                    else if(hitObject.GetComponentInParent<Player>() != null)
+                    {
+                        AIShoot();
+                    }
                     else if (hit.distance < ObstacleRange)
                     {
                         AITurn();

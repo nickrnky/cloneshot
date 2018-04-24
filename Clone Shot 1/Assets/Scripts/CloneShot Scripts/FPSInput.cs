@@ -24,7 +24,8 @@ public class FPSInput : MonoBehaviour {
         falling_speed = 0;
 	}
 	
-	void Update() {
+	void Update()
+    {
         if (AllowMovement)
         {
             
@@ -52,4 +53,10 @@ public class FPSInput : MonoBehaviour {
             falling_speed = 0;
         }
 	}
+    
+    void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }

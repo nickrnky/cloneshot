@@ -23,6 +23,12 @@ public class CloneController : Character
     /// </summary>
     private bool DoActions = false;
 
+    [SerializeField]
+    public int ObstacleRange = 6;
+
+    [SerializeField]
+    public int Speed = 10;
+
     /// <summary>
     /// The point that the clone should start its actions at.
     /// </summary>
@@ -55,21 +61,69 @@ public class CloneController : Character
         }
         if (DoActions)
         {
-            CurrentFrameNumber++;
-
-            if (Actions != null)
+            if (!Actions.FinishedReading)
             {
-                CurrentRoundActions = Actions.GetPlayerActionsForNextFrame();
+                CurrentFrameNumber++;
 
-                if (CurrentRoundActions != null)
+                if (Actions != null)
                 {
-                    foreach (PlayerAction action in CurrentRoundActions)
+                    CurrentRoundActions = Actions.GetPlayerActionsForNextFrame();
+
+                    if (CurrentRoundActions != null)
                     {
-                        action.PerformActionOnObject(gameObject);
+                        foreach (PlayerAction action in CurrentRoundActions)
+                        {
+                            action.PerformActionOnObject(gameObject);
+                        }
                     }
                 }
             }
+            else
+            {
+                transform.Translate(0, 0, Speed * Time.deltaTime);
 
+                Ray ray = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
+                if (Physics.SphereCast(ray, 0.75f, out hit))
+                {
+                    GameObject hitObject = hit.transform.gameObject;
+                    Player HitPlayer = hitObject.GetComponent<Player>();
+                    if (HitPlayer != null && HitPlayer.Team != Team)
+                    {
+                        if (FireSound != null)
+                        {
+                            FireSound.Play();
+                        }
+
+                        Vector3 point = gameObject.transform.forward;
+
+                        Vector3 StartingPoint;
+                        if (ShootingZone != null)
+                        {
+                            StartingPoint = ShootingZone.transform.position;
+                        }
+                        else
+                        {
+                            StartingPoint = gameObject.transform.position;
+                        }
+
+                        CmdShoot(point, StartingPoint);
+                    }
+                    else if (hit.distance < ObstacleRange)
+                    {
+                        float angle = Random.Range(-110, 110);
+                        transform.Rotate(0, angle, 0);
+                    }
+                }
+                else
+                {
+                    int JumpChance = Random.Range(0, 10);
+                    if(JumpChance > 7)
+                    {
+
+                    }
+                }
+            }
         }
     }
 

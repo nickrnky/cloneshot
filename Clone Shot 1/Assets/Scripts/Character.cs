@@ -54,6 +54,11 @@ namespace Assets.Scripts
         /// Represents the distance of the object to the ground
         /// </summary>
         public float DistanceToTheGround;
+        
+        /// <summary>
+        /// Sound thats played when the weapon is fired.
+        /// </summary>
+        public AudioSource FireSound;
 
         /// <summary>
         /// The object used to check if the player is on the ground
@@ -79,6 +84,9 @@ namespace Assets.Scripts
         public int MaxHealth = 100;
 
         internal Rigidbody SelfRigidBody;
+
+        [SerializeField]
+        public GameObject ShootingZone;
 
         public Teams Team { get; set; }
         
@@ -191,6 +199,7 @@ namespace Assets.Scripts
         {
             Team = team;
         }
+
 
         #endregion Public Functions
     }

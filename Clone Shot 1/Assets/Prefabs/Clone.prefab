@@ -2790,8 +2790,12 @@ MonoBehaviour:
     type: 2}
   CurrentFrameNumber: 0
   DistanceToTheGround: 0
+  FireSound: {fileID: 0}
   GroundCheck: {fileID: 4097735336802226}
   MaxHealth: 3
+  ShootingZone: {fileID: 1164375810984094}
+  ObstacleRange: 6
+  Speed: 10
 --- !u!114 &114687919224582462
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -32,11 +32,6 @@ public class Player : Character
     /// </summary>
     public float DamageFlashSpeed = 5f;
 
-    /// <summary>
-    /// Sound thats played when the weapon is fired.
-    /// </summary>
-    public AudioSource FireSound;
-
     [SerializeField]
     public float JumpForce = 10;
 
@@ -48,8 +43,6 @@ public class Player : Character
     private Vector3 PreviousMovement;
     private Quaternion PreviousRotation;
 
-    [SerializeField]
-    public GameObject ShootingZone;
 
     [SerializeField]
     public SoundController SoundManager;
@@ -138,6 +131,7 @@ public class Player : Character
             IsJumping = Physics.Raycast(transform.position, -Vector3.up, DistanceToTheGround + 0.1f);
         }
     }
+
 
     #endregion Unity Events
 

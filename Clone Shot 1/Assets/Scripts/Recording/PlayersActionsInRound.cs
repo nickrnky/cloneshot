@@ -16,6 +16,8 @@ namespace Assets.Scripts.Recording
         /// </summary>
         private List<PlayerAction> Actions { get; set; }
 
+        public bool FinishedReading { get; set; }
+
         /// <summary>
         /// The index number of the last action processed. (Used for optimization purposes).
         /// </summary>
@@ -33,6 +35,7 @@ namespace Assets.Scripts.Recording
         public PlayersActionsInRound()
         {
             Actions = new List<PlayerAction>();
+            FinishedReading = false;
         }
 
         #endregion Constructors
@@ -72,7 +75,13 @@ namespace Assets.Scripts.Recording
         internal List<PlayerAction> GetPlayerActionsForNextFrame()
         {
             FrameNumber++;
-            if (Actions == null || !Actions.Any() || Actions.Count <= CurrentIndex)
+            if(Actions.Count <= CurrentIndex)
+            {
+                FinishedReading = true;
+                return null;
+            }
+
+            if (Actions == null || !Actions.Any() )
             {
                 return null;
             }
@@ -131,6 +140,7 @@ namespace Assets.Scripts.Recording
         {
             CurrentIndex = 0;
             FrameNumber = 0;
+            FinishedReading = false;
         }
 
         /// <summary>

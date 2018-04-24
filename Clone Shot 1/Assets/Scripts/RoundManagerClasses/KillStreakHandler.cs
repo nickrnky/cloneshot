@@ -43,12 +43,6 @@ namespace Assets.Scripts.RoundManagerClasses
                 return false;
             }
             
-            if(BlueTeamDifference == RedTeamDifference)
-            {
-                TeamWithLastKill = Teams.None;
-            }
-
-
             #region First Blood
 
             if(TeamWithLastKill == Teams.None && (BlueTeamDifference + RedTeamDifference) > 0)
@@ -58,6 +52,11 @@ namespace Assets.Scripts.RoundManagerClasses
             }
 
             #endregion First Blood
+
+            if (BlueTeamDifference == RedTeamDifference)
+            {
+                TeamWithLastKill = Teams.None;
+            }
 
             if (BlueTeamDifference != 0 && RedTeamDifference == 0)
             {
@@ -84,6 +83,8 @@ namespace Assets.Scripts.RoundManagerClasses
                     Streak = 1;
                 }
             }
+
+            UnityEngine.Debug.Log("Red: " + RedTeamDifference + ", Blue: " + BlueTeamDifference + ", Streak: " + Streak);
 
             #endregion Update Information
 

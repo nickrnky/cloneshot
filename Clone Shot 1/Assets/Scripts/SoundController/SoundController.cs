@@ -19,6 +19,8 @@ public class SoundController : MonoBehaviour
 
     private Semaphore AudioClipBufferLock = new Semaphore(1, 1);
 
+    private float BlockTimeInSeconds = 0;
+
     private bool Blocked = false;
 
     void Start()
@@ -89,7 +91,8 @@ public class SoundController : MonoBehaviour
 
         if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Block)
         {
-            BlockAudioSourceForMS((int)(Instance.Clip.length * 1000));
+            BlockTimeInSeconds = Instance.Clip.length;
+            StartCoroutine("BlockAudioSource");
         }
 
         if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Wait ||
@@ -100,17 +103,12 @@ public class SoundController : MonoBehaviour
             ReleaseAudioClipBufferLock();
         }
     }
-
-    private IEnumerator BlockAudioSourceForMS(int MilliSeconds)
+    
+    private IEnumerator BlockAudioSource()
     {
         Blocked = true;
-        DateTime now = DateTime.Now;
-        DateTime then = now.AddMilliseconds(MilliSeconds);
-
-        while((now = DateTime.Now) < then)
-        {
-            yield return null;
-        }
+        
+        yield return new WaitForSeconds((float)BlockTimeInSeconds);
 
         Blocked = false;
     }
@@ -144,7 +142,8 @@ public class SoundController : MonoBehaviour
         
         if (Instance.Mode == Assets.Scripts.SoundController.PlayMode.WaitAndBlock)
         {
-            BlockAudioSourceForMS((int)(Instance.Clip.length * 1000));
+            BlockTimeInSeconds = Instance.Clip.length;
+            StartCoroutine("BlockAudioSource");
         }
     }
 

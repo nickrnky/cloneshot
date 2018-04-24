@@ -224,10 +224,6 @@ public class RoundManager : NetworkBehaviour
     // Post round
     IEnumerator PostProcessing()
     {
-        foreach (Player player in players.Values)
-        {
-            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.Defense);
-        }
 
         // Clean up and get recording
         int count = 0;
@@ -280,7 +276,6 @@ public class RoundManager : NetworkBehaviour
         KillStreakBufferInstance instance;
         while((instance = KillStreakManager.GetBottomOfBuffer()) != null)
         {
-            Debug.Log("Loading kill streak buffer!");
             foreach(Player player in players.Values)
             {
                 if(player.Team == instance.Team)

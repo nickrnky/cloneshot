@@ -2791,7 +2791,7 @@ MonoBehaviour:
   CurrentFrameNumber: 0
   DistanceToTheGround: 0
   GroundCheck: {fileID: 4097735336802226}
-  MaxHealth: 100
+  MaxHealth: 3
 --- !u!114 &114687919224582462
 MonoBehaviour:
   m_ObjectHideFlags: 1

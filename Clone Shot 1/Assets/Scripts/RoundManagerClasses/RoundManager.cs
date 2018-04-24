@@ -99,9 +99,11 @@ public class RoundManager : NetworkBehaviour
                     Debug.Log("No longer fighting");
                 }
 
+                Debug.Log("Updating Kill Steaks");
                 bool KillStreakUpdated = KillStreakManager.UpdateKillStreakReturnTrueIfBufferChanged(NumberOfBlueTeamAlive, NumberOfRedTeamAlive);
                 if(KillStreakUpdated)
                 {
+                    Debug.Log("Loading Kill Streaks");
                     ProcessKillStreakBuffer();
                 }
             }
@@ -126,7 +128,26 @@ public class RoundManager : NetworkBehaviour
         //Debug.Log("round 1");
 
         Debug.Log("Ready?");
-        yield return new WaitForSeconds(TimeBetweenRounds);
+        yield return new WaitForSeconds(TimeBetweenRounds - 3);
+        foreach(Player player in players.Values)
+        {
+            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.Three);
+        }
+        yield return new WaitForSeconds(1);
+        foreach (Player player in players.Values)
+        {
+            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.Two);
+        }
+        yield return new WaitForSeconds(1);
+        foreach (Player player in players.Values)
+        {
+            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.One);
+        }
+        yield return new WaitForSeconds(1);
+        foreach (Player player in players.Values)
+        {
+            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.Fight);
+        }
         Debug.Log("Go!!!");
 
         int count = 0;
@@ -203,6 +224,11 @@ public class RoundManager : NetworkBehaviour
     // Post round
     IEnumerator PostProcessing()
     {
+        foreach (Player player in players.Values)
+        {
+            player.RpcPlaySound(Assets.Scripts.SoundController.PlayMode.WaitAndBlock, SoundEffects.Defense);
+        }
+
         // Clean up and get recording
         int count = 0;
         foreach (Player player in players.Values)
@@ -213,12 +239,12 @@ public class RoundManager : NetworkBehaviour
             GameObject clone = new GameObject();
             if (player.Team == Teams.Blue)
             {
-                clone = CreateClone(BluePlayerStart, action);
+                clone = CreateClone(BluePlayerStart, action, Teams.Blue);
                 BlueTeamClones.Add(clone);
             }
             else
             {
-                clone = CreateClone(RedPlayerStart, action);
+                clone = CreateClone(RedPlayerStart, action, Teams.Red);
                 RedTeamClones.Add(clone);
             }
 
@@ -254,6 +280,7 @@ public class RoundManager : NetworkBehaviour
         KillStreakBufferInstance instance;
         while((instance = KillStreakManager.GetBottomOfBuffer()) != null)
         {
+            Debug.Log("Loading kill streak buffer!");
             foreach(Player player in players.Values)
             {
                 if(player.Team == instance.Team)
@@ -339,7 +366,7 @@ public class RoundManager : NetworkBehaviour
     /// <param name="StartingPosition"></param>
     /// <param name="ActionReader"></param>
     /// <returns></returns>
-    private GameObject CreateClone(Vector3 StartingPosition, PlayersActionsInRound ActionReader)
+    private GameObject CreateClone(Vector3 StartingPosition, PlayersActionsInRound ActionReader, Teams Team)
     {
         if (StartingPosition == null || ActionReader == null)
         {
@@ -365,6 +392,8 @@ public class RoundManager : NetworkBehaviour
 
         Controller.SetStartingPosition(StartingPosition);
         Controller.SetActionReader(ActionReader);
+
+        Controller.Team = Team;
 
         return Clone;
     }

@@ -99,10 +99,10 @@ public static class SoundEffectManager
                     newClip = Resources.Load<AudioClip>("Sound Effects/Multikill");
                     break;
                 case SoundEffects.One:
-                    newClip = Resources.Load<AudioClip>("Sound Effects/One minute warning");
+                    newClip = Resources.Load<AudioClip>("Sound Effects/One");
                     break;
                 case SoundEffects.OneMinute:
-                    newClip = Resources.Load<AudioClip>("Sound Effects/One");
+                    newClip = Resources.Load<AudioClip>("Sound Effects/One minute warning");
                     break;
                 case SoundEffects.Perfect:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Perfect");

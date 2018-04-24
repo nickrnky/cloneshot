@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 30
-  Damage: 5
+  Damage: 1
   Lifetime: 10
   PointToTravelTo: {x: 0, y: 0, z: 0}
 --- !u!114 &114137445238862382

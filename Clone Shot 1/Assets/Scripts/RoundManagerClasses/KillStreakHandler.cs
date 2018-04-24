@@ -51,7 +51,7 @@ namespace Assets.Scripts.RoundManagerClasses
 
             #region First Blood
 
-            if(TeamWithLastKill == Teams.None)
+            if(TeamWithLastKill == Teams.None && (BlueTeamDifference + RedTeamDifference) > 0)
             {
                 KillStreakBuffer.Add(new KillStreakBufferInstance(PlayMode.WaitAndBlock, SoundEffects.FirstBlood, Teams.Red));
                 KillStreakBuffer.Add(new KillStreakBufferInstance(PlayMode.WaitAndBlock, SoundEffects.FirstBlood, Teams.Blue));
@@ -102,7 +102,7 @@ namespace Assets.Scripts.RoundManagerClasses
             }
             else if(TeamWithLastKill == Teams.None)
             {
-                return KillStreakCount == KillStreakBuffer.Count;
+                return KillStreakCount != KillStreakBuffer.Count;
             }
 
             #region Multiple kills in a single frame
@@ -198,7 +198,7 @@ namespace Assets.Scripts.RoundManagerClasses
             #endregion Kill Streaks
 
 
-            return KillStreakCount == KillStreakBuffer.Count;
+            return KillStreakCount != KillStreakBuffer.Count;
         }
 
         public KillStreakBufferInstance GetBottomOfBuffer()

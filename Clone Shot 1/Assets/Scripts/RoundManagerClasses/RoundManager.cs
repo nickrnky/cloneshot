@@ -80,7 +80,7 @@ public class RoundManager : NetworkBehaviour
         if (CurrentRound < NumberOfRounds && StageInProgress == 0)
         {
             StageInProgress = 1;
-            Debug.Log("Starting Round " + CurrentRound);
+            Debug.Log("Starting Stage " + CurrentRound);
             StartCoroutine(StartRound());
             return;
         }
@@ -111,7 +111,7 @@ public class RoundManager : NetworkBehaviour
         // Post processing
         if(StageInProgress == 3)
         {
-            Debug.Log("Round over " + CurrentRound);
+            Debug.Log("Stage over " + CurrentRound);
             StageInProgress = 4;
             StartCoroutine(PostProcessing());
         }
@@ -132,6 +132,8 @@ public class RoundManager : NetworkBehaviour
         int count = 0;
         foreach (Player person in players.Values)
         {
+            person.IsDead = false;
+            person.CurrentHealth = person.MaxHealth;
             if (person.Team == Teams.Blue)
             {
                 //person.transform.position = PlayerOneStart;
@@ -252,13 +254,16 @@ public class RoundManager : NetworkBehaviour
         int RedCount = 0, BlueCount = 0;
         foreach(Player tempPlayer in players.Values)
         {
-            if(tempPlayer.Team == Teams.Blue)
+            if (tempPlayer.IsAlive())
             {
-                BlueCount++;
-            }
-            else if(tempPlayer.Team == Teams.Red)
-            {
-                RedCount++;
+                if (tempPlayer.Team == Teams.Blue)
+                {
+                    BlueCount++;
+                }
+                else if (tempPlayer.Team == Teams.Red)
+                {
+                    RedCount++;
+                }
             }
         }
 
@@ -367,6 +372,7 @@ public class RoundManager : NetworkBehaviour
         {
             controller.ResetActions();
             controller.IsDead = false;
+            controller.CurrentHealth = controller.MaxHealth;
         }
         else
         {

@@ -166,6 +166,7 @@ public class Player : Character
         this.transform.position = location;
         PlayerMovement.AllowMovement = true;
         ActionsInRound = new PlayersActionsInRound();
+        CurrentHealth = MaxHealth;
         IsDead = false;
 
         CurrentFrameNumber = 0;

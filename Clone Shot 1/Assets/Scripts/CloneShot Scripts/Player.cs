@@ -7,7 +7,7 @@ using UnityEngine;
 using Assets.Scripts.Recording;
 using Assets.Scripts.Recording.PlayerActions;
 using Assets.Scripts;
-
+using Assets.Scripts.SoundController;
 
 [RequireComponent(typeof(Collider))]
 public class Player : Character
@@ -50,6 +50,9 @@ public class Player : Character
 
     [SerializeField]
     public GameObject ShootingZone;
+
+    [SerializeField]
+    public SoundController SoundManager;
 
 
     #endregion Properties
@@ -147,6 +150,15 @@ public class Player : Character
         Debug.Log("Player " + GetPlayerID() + " is dead!");
     }
 
+    [ClientRpc]
+    public void RpcPlaySound(Assets.Scripts.SoundController.PlayMode Mode, SoundEffects SoundEffect)
+    {
+        if(SoundManager != null)
+        {
+            SoundManager.ProcessSoundEffect(Mode, SoundEffect);
+        }
+    }
+
     // Respawn player called on server but run on client
     [ClientRpc]
     public void RpcRespawn(Vector3 location)
@@ -154,6 +166,7 @@ public class Player : Character
         this.transform.position = location;
         PlayerMovement.AllowMovement = true;
         ActionsInRound = new PlayersActionsInRound();
+        IsDead = false;
 
         CurrentFrameNumber = 0;
     }

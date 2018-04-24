@@ -6,20 +6,16 @@ using System.Text;
 
 namespace Assets.Scripts.RoundManagerClasses
 {
-    class KillStreakBufferInstance
+    internal class KillStreakBufferInstance
     {
-        public SoundControllerInstance Instance;
+        public PlayMode Mode;
+        public SoundEffects SoundEffect;
         public Teams Team;
         
         public KillStreakBufferInstance(PlayMode mode, SoundEffects soundEffect, Teams team)
         {
-            Instance = new SoundControllerInstance(mode, soundEffect);
-            Team = team;
-        }
-
-        public KillStreakBufferInstance(SoundControllerInstance instance, Teams team)
-        {
-            Instance = instance;
+            Mode = mode;
+            SoundEffect = soundEffect;
             Team = team;
         }
     }

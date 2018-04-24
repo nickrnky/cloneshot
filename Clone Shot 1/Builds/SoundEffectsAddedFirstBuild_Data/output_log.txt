@@ -1,0 +1,84 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 650 Ti (ID=0x11c6)
+    Vendor:   NVIDIA
+    VRAM:     984 MB
+    Driver:   23.21.13.9135
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.036 seconds
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: E:\My Documents\Projects\CloneShot\cloneshot\Clone Shot 1\Builds\SoundEffectsAddedFirstBuild_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 144Hz; virtual: 3840x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1743)
+
+UnloadTime: 1.927946 ms
+Setting up 3 worker threads for Enlighten.
+  Thread -> id: 11dc -> priority: 1 
+  Thread -> id: 30fc -> priority: 1 
+  Thread -> id: 4154 -> priority: 1 
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1743)
+
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1743)
+
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1743)
+
+The referenced script on this Behaviour (Game Object '<null>') is missing!
+ 
+(Filename:  Line: 1743)
+
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1743)
+
+The referenced script on this Behaviour (Game Object 'Player') is missing!
+ 
+(Filename:  Line: 1743)
+
+Trigger Entered
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.87.26.226:9999}
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+ClientDisconnected due to error: Timeout
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+

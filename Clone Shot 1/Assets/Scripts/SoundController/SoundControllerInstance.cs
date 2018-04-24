@@ -14,11 +14,15 @@ namespace Assets.Scripts.SoundController
     /// </summary>
     public enum PlayMode {Immediate, WaitAndBlock, Wait, Block }
 
-    class SoundControllerInstance
+    internal class SoundControllerInstance
     {
         public PlayMode Mode;
         public AudioClip Clip;
 
+        public SoundControllerInstance()
+        {
+
+        }
         public SoundControllerInstance(PlayMode mode, AudioClip clip)
         {
             Mode = mode;

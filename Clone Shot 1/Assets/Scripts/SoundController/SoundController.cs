@@ -1,21 +1,31 @@
-﻿using System;
+﻿using Assets.Scripts.SoundController;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class SoundController : MonoBehaviour {
+public class SoundController : MonoBehaviour
+{
 
     // Use this for initialization
     public int MaxAudioDistance { get; set; }
 
-    private AudioSource currentSource;
+    private AudioSource BlockedAudioSource;
+
+    private List<SoundControllerInstance> AudioClipBuffer = new List<SoundControllerInstance>();
+
+    private Semaphore AudioClipBufferLock = new Semaphore(1, 1);
+
+    private bool Blocked = false;
 
     void Start()
     {
-        currentSource = GetComponent<AudioSource>();
+        BlockedAudioSource = GetComponent<AudioSource>();
 
-        currentSource.maxDistance = MaxAudioDistance;
+        BlockedAudioSource.maxDistance = MaxAudioDistance;
    }
     
     public void LaunchTestAllSoundsCouritine()
@@ -26,11 +36,11 @@ public class SoundController : MonoBehaviour {
 
     private IEnumerator TestAllSounds()
     {
-        if(currentSource == null)
+        if(BlockedAudioSource == null)
         {
-            currentSource = GetComponent<AudioSource>();
+            BlockedAudioSource = GetComponent<AudioSource>();
 
-            currentSource.maxDistance = MaxAudioDistance;
+            BlockedAudioSource.maxDistance = MaxAudioDistance;
         }
 
         AudioClip tempClip;
@@ -44,9 +54,9 @@ public class SoundController : MonoBehaviour {
             if(tempClip != null)
             {
                 Debug.Log("Playing clip #" + clipNumber);
-                currentSource.clip = tempClip;
-                currentSource.Play();
-                while(currentSource.isPlaying)
+                BlockedAudioSource.clip = tempClip;
+                BlockedAudioSource.Play();
+                while(BlockedAudioSource.isPlaying)
                 {
                     yield return null;
                 }
@@ -58,9 +68,93 @@ public class SoundController : MonoBehaviour {
 
     }
 
+    public void ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode Mode, SoundEffects SoundEffect)
+    {
+        AudioClip clip = SoundEffectManager.GetClip(SoundEffect);
+        if(clip != null)
+        {
+            SoundControllerInstance instance = new SoundControllerInstance(Mode, clip);
+            ProcessSoundEffect(instance);
+        }
+    }
+
+    internal void ProcessSoundEffect(SoundControllerInstance Instance)
+    {
+        if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Immediate || Instance.Mode == Assets.Scripts.SoundController.PlayMode.Block)
+        {
+            AudioSource source = new AudioSource();
+            source.clip = Instance.Clip;
+            source.Play();
+        }
+
+        if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Block)
+        {
+            BlockAudioSourceForMS((int)(Instance.Clip.length * 1000));
+        }
+
+        if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Wait ||
+            Instance.Mode == Assets.Scripts.SoundController.PlayMode.WaitAndBlock)
+        {
+            GetAudioClipBufferLock();
+            AudioClipBuffer.Add(Instance);
+            ReleaseAudioClipBufferLock();
+        }
+    }
+
+    private IEnumerator BlockAudioSourceForMS(int MilliSeconds)
+    {
+        Blocked = true;
+        DateTime now = DateTime.Now;
+        DateTime then = now.AddMilliseconds(MilliSeconds);
+
+        while((now = DateTime.Now) < then)
+        {
+            yield return null;
+        }
+
+        Blocked = false;
+    }
+
     // Update is called once per frame
     void Update ()
     {
-		
+		if(!Blocked)
+        {
+            GetAudioClipBufferLock();
+            SoundControllerInstance instance = null;
+            if (AudioClipBuffer.Any())
+            {
+                instance = new SoundControllerInstance();
+                instance = AudioClipBuffer[0];
+                AudioClipBuffer.RemoveAt(0);
+            }
+            ReleaseAudioClipBufferLock();
+
+            if(instance != null)
+            {
+                PlayOnBlockedAudioSource(instance);
+            }
+        }
 	}
+
+    private void PlayOnBlockedAudioSource(SoundControllerInstance Instance)
+    {
+        BlockedAudioSource.clip = Instance.Clip;
+        BlockedAudioSource.Play();
+        
+        if (Instance.Mode == Assets.Scripts.SoundController.PlayMode.WaitAndBlock)
+        {
+            BlockAudioSourceForMS((int)(Instance.Clip.length * 1000));
+        }
+    }
+
+    private void GetAudioClipBufferLock()
+    {
+        AudioClipBufferLock.WaitOne();
+    }
+
+    private void ReleaseAudioClipBufferLock()
+    {
+        AudioClipBufferLock.Release();
+    }
 }

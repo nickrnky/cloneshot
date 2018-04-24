@@ -14,10 +14,12 @@ public class FPSInput : MonoBehaviour {
     public bool AllowMovement = true;
 
 	private CharacterController _charController;
+    private Animator _animator;
 
     private float falling_speed;
 	
 	void Start() {
+        _animator = GetComponent<Animator>();
 		_charController = GetComponent<CharacterController>();
         falling_speed = 0;
 	}
@@ -41,7 +43,9 @@ public class FPSInput : MonoBehaviour {
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement);
             _charController.Move(movement);
+            _animator.SetFloat("Speed", movement.sqrMagnitude);
         }
+
 
         if (_charController.isGrounded)
         {

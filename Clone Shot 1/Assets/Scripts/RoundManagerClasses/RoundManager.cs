@@ -129,6 +129,12 @@ public class RoundManager : NetworkBehaviour
         // Position players
         //Debug.Log("round 1");
 
+        // Set round
+        foreach(Player y in players.Values)
+        {
+            y.RpcSetRound(CurrentRound + 1);
+        }
+
         Debug.Log("Ready?");
         yield return new WaitForSeconds(TimeBetweenRounds - 3);
         foreach(Player player in players.Values)
@@ -252,8 +258,18 @@ public class RoundManager : NetworkBehaviour
             CmdSpawnClone(clone);
         }
 
+        // Find winner
+        foreach (Player y in players.Values)
+        {
+            if (y.IsAlive())
+            {
+                Debug.Log("Winner");
+                y.RpcAddWin();
+            }
+        }
+
         // Set players to alive
-        foreach(Player player in players.Values)
+        foreach (Player player in players.Values)
         {
             player.IsDead = false;
             //y.PlayerMovement.AllowMovement = true;

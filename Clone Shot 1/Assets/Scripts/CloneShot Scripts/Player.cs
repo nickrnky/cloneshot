@@ -1,5 +1,5 @@
 ﻿using UnityEngine.Networking;
-
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,6 +51,14 @@ public class Player : Character
     [SerializeField]
     public SoundController SoundManager;
 
+<<<<<<< HEAD
+    private Text RoundText;
+    private Text WinText;
+    private int TotalWins = 0;
+
+
+=======
+>>>>>>> 3e54c9b64509d27fbc2297d2f99b3364b1c25251
     #endregion Properties
 
     #region Unity Events
@@ -71,6 +79,20 @@ public class Player : Character
         PreviousRotation = transform.rotation;
 
         NumberBullets = ClipSize;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+        RoundText = this.transform.Find("Canvas").transform.Find("Text").GetComponent<Text>();
+        WinText = this.transform.Find("Canvas").transform.Find("Text (1)").GetComponent<Text>();
+
+        RoundText.text = "Round: 0";
+        WinText.text = "Wins: 0";
+=======
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 7367d9a6f22a6f94924a93fcd5419f8d670772d3
 
 		switch (Random.Range(1, 7)) {
 		case 1:
@@ -92,7 +114,12 @@ public class Player : Character
 			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music6);
 			break;
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 465a782e64fc123e136fbe522a7ff362bc3d9654
+>>>>>>> 3e54c9b64509d27fbc2297d2f99b3364b1c25251
+>>>>>>> 7367d9a6f22a6f94924a93fcd5419f8d670772d3
     }
 
     /// <summary>
@@ -102,6 +129,17 @@ public class Player : Character
     {
         CurrentFrameNumber++;
         Damaged = false;
+
+        // Set win text
+        if (isLocalPlayer)
+        {
+            WinText.text = "Wins: " + TotalWins;
+        }
+        else
+        {
+            WinText.text = "";
+        }
+        
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -220,6 +258,22 @@ public class Player : Character
         CurrentFrameNumber = 0;
     }
 
+    // Set Round
+    [ClientRpc]
+    public void RpcSetRound(int RoundNumber)
+    {
+        RoundText.text = "Round: " + RoundNumber;
+    }
+
+    // Increment win
+    [ClientRpc]
+    public void RpcAddWin()
+    {
+
+        TotalWins++;
+        WinText.text = "Wins: " + TotalWins;
+        
+    }
 
     internal PlayersActionsInRound GetPlayerActions()
     {

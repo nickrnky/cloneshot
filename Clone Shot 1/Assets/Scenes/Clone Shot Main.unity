@@ -2078,7 +2078,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1918080938620766, guid: 0f09a69d0bb37394993749cabe159990,
+  m_PlayerPrefab: {fileID: 1470523702340462, guid: 0f09a69d0bb37394993749cabe159990,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
@@ -2086,7 +2086,7 @@ MonoBehaviour:
   m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 1021156745555878, guid: 18badadbbfcc07944aad50ddf6cfe367, type: 2}
-  - {fileID: 1499311353396174, guid: df5cff12f2405f14c98ae7a171d5d986, type: 2}
+  - {fileID: 1205427357068932, guid: df5cff12f2405f14c98ae7a171d5d986, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -5285,7 +5285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoundsCheck: {fileID: 398541344}
-  ClonePrefab: {fileID: 1499311353396174, guid: df5cff12f2405f14c98ae7a171d5d986,
+  ClonePrefab: {fileID: 1205427357068932, guid: df5cff12f2405f14c98ae7a171d5d986,
     type: 2}
   DaManager: {fileID: 370659140}
   SpawnerBlue: {fileID: 212737438}

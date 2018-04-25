@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(AudioSource))]
 public class CloneController : Character
 {
     #region Properties
@@ -52,6 +54,7 @@ public class CloneController : Character
     void Start()
     {
 
+        InitializeGlow();
         CurrentFrameNumber = 0;
 
         CurrentRoundActions = new List<PlayerAction>();

@@ -18,6 +18,12 @@ namespace Assets.Scripts
         private AudioSource Audio;
 
         [SerializeField]
+        public GameObject BlueGlow;
+
+        [SerializeField]
+        public GameObject RedGlow;
+
+        [SerializeField]
         public GameObject bulletPrefab;
 
         /// <summary>
@@ -90,7 +96,20 @@ namespace Assets.Scripts
         [SerializeField]
         public GameObject ShootingZone;
 
-        public Teams Team { get; set; }
+        private Teams team;
+        public Teams Team
+        {
+            get
+            {
+                return team;
+            }
+            set
+            {
+                Debug.Log("Team set to: " + value);
+                team = value;
+                RpcSetGlow(value);
+            }
+        }
         
         #endregion Properties
 
@@ -101,6 +120,8 @@ namespace Assets.Scripts
         /// </summary>
         void Start()
         {
+            Team = Team;
+
             Audio = GetComponent<AudioSource>();
             IsJumping = false;
             IsDead = false;
@@ -119,6 +140,19 @@ namespace Assets.Scripts
         }
 
         #endregion Unity Events
+
+        internal void InitializeGlow()
+        {
+            Debug.Log("turning glow off");
+            if (BlueGlow != null)
+            {
+                BlueGlow.SetActive(false);
+            }
+            if (RedGlow != null)
+            {
+                RedGlow.SetActive(false);
+            }
+        }
 
         #region Public Functions
 
@@ -232,6 +266,33 @@ namespace Assets.Scripts
         public string GetPlayerID()
         {
             return PlayerID;
+        }
+
+        [ClientRpc]
+        public void RpcSetGlow(Teams team)
+        {
+            if (team == Teams.Blue)
+            {
+                if (BlueGlow != null)
+                {
+                    BlueGlow.SetActive(true);
+                }
+                if (RedGlow != null)
+                {
+                    RedGlow.SetActive(false);
+                }
+            }
+            else if (team == Teams.Red)
+            {
+                if (BlueGlow != null)
+                {
+                    BlueGlow.SetActive(false);
+                }
+                if (RedGlow != null)
+                {
+                    RedGlow.SetActive(true);
+                }
+            }
         }
 
         public void SetPlayerID(string ID)

@@ -418,6 +418,7 @@ public class RoundManager : NetworkBehaviour
         }
 
         Controller.Team = Team;
+        Controller.RpcSetGlow(Team);
 
         return Clone;
     }

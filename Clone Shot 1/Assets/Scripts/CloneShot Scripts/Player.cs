@@ -51,11 +51,14 @@ public class Player : Character
     [SerializeField]
     public SoundController SoundManager;
 
+<<<<<<< HEAD
     private Text RoundText;
     private Text WinText;
     private int TotalWins = 0;
 
 
+=======
+>>>>>>> 3e54c9b64509d27fbc2297d2f99b3364b1c25251
     #endregion Properties
 
     #region Unity Events
@@ -65,7 +68,7 @@ public class Player : Character
     /// </summary>
     void Start()
     {
-
+        InitializeGlow();
         ActionsInRound = new PlayersActionsInRound();
         DamageFlashColour = new Color(1f, 0f, 0f, 0.1f);
         PlayerMovement = GetComponentInParent<FPSInput>();
@@ -76,12 +79,40 @@ public class Player : Character
         PreviousRotation = transform.rotation;
 
         NumberBullets = ClipSize;
+<<<<<<< HEAD
 
         RoundText = this.transform.Find("Canvas").transform.Find("Text").GetComponent<Text>();
         WinText = this.transform.Find("Canvas").transform.Find("Text (1)").GetComponent<Text>();
 
         RoundText.text = "Round: 0";
         WinText.text = "Wins: 0";
+=======
+<<<<<<< HEAD
+        
+=======
+
+		switch (Random.Range(1, 7)) {
+		case 1:
+			SoundManager.ProcessSoundEffect (Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music1);
+			break;
+		case 2:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music2);
+			break;
+		case 3:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music3);
+			break;
+		case 4:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music4);
+			break;
+		case 5:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music5);
+			break;
+		case 6:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music6);
+			break;
+		}
+>>>>>>> 465a782e64fc123e136fbe522a7ff362bc3d9654
+>>>>>>> 3e54c9b64509d27fbc2297d2f99b3364b1c25251
     }
 
     /// <summary>

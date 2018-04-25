@@ -35,6 +35,10 @@ public class Player : Character
     [SerializeField]
     public float JumpForce = 10;
 
+    public int ClipSize = 30;
+    private int NumberBullets;
+    private bool reloading = false;
+
     /// <summary>
     /// The script being used to handle the players movement.
     /// </summary>
@@ -66,6 +70,8 @@ public class Player : Character
         PreviousRotation = new Quaternion();
         PreviousMovement = transform.position;
         PreviousRotation = transform.rotation;
+
+        NumberBullets = ClipSize;
     }
 
     /// <summary>
@@ -88,6 +94,15 @@ public class Player : Character
             Cursor.visible = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (!reloading)
+            {
+                reloading = true;
+                StartCoroutine(RunReload());
+            }
+        }
+
         if (PreviousMovement != transform.position)
         {
             PreviousMovement = transform.position;
@@ -101,6 +116,16 @@ public class Player : Character
         }
         if (Input.GetMouseButtonDown(0) && isLocalPlayer)
         {
+            // Number of bullets check
+            if(NumberBullets == 0)
+            {
+                return;
+            }
+            else
+            {
+                NumberBullets--;
+            }
+
             SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.PlasmaShot);
             
             Vector3 point = new Vector3(MainCamera.pixelWidth / 2, MainCamera.pixelHeight / 2, 0);
@@ -131,6 +156,15 @@ public class Player : Character
     #endregion Unity Events
 
     #region Private Methods
+    IEnumerator RunReload()
+    {
+        // Start sound
+        SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Reload);
+        yield return new WaitForSeconds(3.0f);
+        NumberBullets = ClipSize;
+        reloading = false;
+        yield return null;
+    }
 
     public override void Die()
     {

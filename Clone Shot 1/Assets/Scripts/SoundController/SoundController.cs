@@ -24,10 +24,15 @@ public class SoundController : MonoBehaviour
 
     void Start()
     {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         BlockedAudioSource = GetComponent<AudioSource>();
 
         BlockedAudioSource.maxDistance = MaxAudioDistance;
-   }
+    }
     
     public void LaunchTestAllSoundsCouritine()
     {
@@ -81,6 +86,11 @@ public class SoundController : MonoBehaviour
 
     internal void ProcessSoundEffect(SoundControllerInstance Instance)
     {
+        if(BlockedAudioSource == null)
+        {
+            Initialize();
+        }
+
         if(Instance.Mode == Assets.Scripts.SoundController.PlayMode.Immediate || Instance.Mode == Assets.Scripts.SoundController.PlayMode.Block)
         {
             BlockedAudioSource.PlayOneShot(Instance.Clip);

@@ -71,9 +71,6 @@ public class Player : Character
         PreviousRotation = transform.rotation;
 
         NumberBullets = ClipSize;
-<<<<<<< HEAD
-        
-=======
 
 		switch (Random.Range(1, 7)) {
 		case 1:
@@ -95,7 +92,7 @@ public class Player : Character
 			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music6);
 			break;
 		}
->>>>>>> 465a782e64fc123e136fbe522a7ff362bc3d9654
+
     }
 
     /// <summary>

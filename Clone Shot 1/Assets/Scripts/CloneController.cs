@@ -209,11 +209,11 @@ public class CloneController : Character
 
         if (transform.position.y < MinY)
         {
-            movement.y = jump_speed;
+            movement.y = gravity * Time.deltaTime + jump_speed;
         }
         else if (transform.position.y > MaxY)
         {
-            movement.y = gravity * Time.deltaTime + gravity;
+            movement.y = gravity * Time.deltaTime;
         }
 
         if (transform.position.x < MinX)

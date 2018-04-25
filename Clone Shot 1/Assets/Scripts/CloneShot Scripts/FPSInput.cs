@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
 // basic WASD-style movement control
 // commented out line demonstrates that transform.Translate instead of charController.Move doesn't have collision detection
 
 [RequireComponent(typeof(CharacterController))]
 [AddComponentMenu("Control Script/FPS Input")]
-public class FPSInput : MonoBehaviour {
+public class FPSInput : NetworkBehaviour
+{
 	public float speed = 6.0f;
 	public float gravity = -9.8f;
     public float jump_speed = 5.0f;
@@ -38,14 +40,18 @@ public class FPSInput : MonoBehaviour {
             {
                 falling_speed = jump_speed;
             }
-
+            
             falling_speed = gravity * Time.deltaTime + falling_speed;
             movement.y = falling_speed;
+
+            if (_charController.isGrounded)
+            {
+                CmdAnimateRunning(movement);
+            }
 
             movement *= Time.deltaTime;
             movement = transform.TransformDirection(movement);
             _charController.Move(movement);
-            _animator.SetFloat("Speed", movement.sqrMagnitude);
         }
 
 
@@ -59,5 +65,17 @@ public class FPSInput : MonoBehaviour {
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    [Command]
+    private void CmdAnimateRunning(Vector3 Movement)
+    {
+        RpcAnimateRunning(Movement);
+    }
+
+    [ClientRpc]
+    private void RpcAnimateRunning(Vector3 Movement)
+    {
+        _animator.SetFloat("Speed", Movement.sqrMagnitude);
     }
 }

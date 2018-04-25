@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\CloneController.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\FPSInput.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\CloneShot Scripts\NetworkAnimationSync.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\CloneShot Scripts\PlayerSetup.cs" />
      <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerAction.cs" />

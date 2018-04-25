@@ -1302,6 +1302,8 @@ GameObject:
   - component: {fileID: 82320827315980842}
   - component: {fileID: 114789031252797590}
   - component: {fileID: 95154973405397226}
+  - component: {fileID: 114052581864133346}
+  - component: {fileID: 114065143216226468}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2941,6 +2943,7 @@ MonoBehaviour:
   MainCamera: {fileID: 20531407891545200}
   DamageFlashSpeed: 5
   JumpForce: 100
+  ClipSize: 30
   PlayerMovement: {fileID: 114590085923969220}
   SoundManager: {fileID: 114789031252797590}
 --- !u!114 &114049400388582734
@@ -2959,6 +2962,36 @@ MonoBehaviour:
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45
+--- !u!114 &114052581864133346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1918080938620766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95154973405397226}
+  m_ParameterSendBits: 3
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
+--- !u!114 &114065143216226468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1918080938620766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 280bad481f1c53c4487cff5906c1b5df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114070772442904280
 MonoBehaviour:
   m_ObjectHideFlags: 1

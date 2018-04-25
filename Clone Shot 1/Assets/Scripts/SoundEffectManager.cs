@@ -31,6 +31,7 @@ public enum SoundEffects
     PlasmaShot,
     Rampage,
     RedLead,
+    Reload,
     RoundOver,
     SuddenDeath,
     TeamsAreTied,
@@ -129,6 +130,9 @@ public static class SoundEffectManager
                     break;
                 case SoundEffects.RedLead:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Red lead");
+                    break;
+                case SoundEffects.Reload:
+                    newClip = Resources.Load<AudioClip>("Sound Effects/reload");
                     break;
                 case SoundEffects.RoundOver:
                     newClip = Resources.Load<AudioClip>("Sound Effects/Round Over");

@@ -1,8 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\detectCollision.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SoundController\SoundController.cs">
     <Files>
       <File FileName="Assets\detectCollision.cs" Line="9" Column="33" />
+      <File FileName="Assets\Scripts\SoundEffectManager.cs" Line="189" Column="6" />
+      <File FileName="Assets\Scripts\CloneShot Scripts\Player.cs" Line="93" Column="10" />
+      <File FileName="Assets\Scripts\SoundController\SoundController.cs" Line="86" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

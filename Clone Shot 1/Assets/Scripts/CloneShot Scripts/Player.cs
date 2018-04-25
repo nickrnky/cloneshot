@@ -51,7 +51,6 @@ public class Player : Character
     [SerializeField]
     public SoundController SoundManager;
 
-
     #endregion Properties
 
     #region Unity Events
@@ -72,7 +71,31 @@ public class Player : Character
         PreviousRotation = transform.rotation;
 
         NumberBullets = ClipSize;
+<<<<<<< HEAD
         
+=======
+
+		switch (Random.Range(1, 7)) {
+		case 1:
+			SoundManager.ProcessSoundEffect (Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music1);
+			break;
+		case 2:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music2);
+			break;
+		case 3:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music3);
+			break;
+		case 4:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music4);
+			break;
+		case 5:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music5);
+			break;
+		case 6:
+			SoundManager.ProcessSoundEffect(Assets.Scripts.SoundController.PlayMode.Immediate, SoundEffects.Music6);
+			break;
+		}
+>>>>>>> 465a782e64fc123e136fbe522a7ff362bc3d9654
     }
 
     /// <summary>

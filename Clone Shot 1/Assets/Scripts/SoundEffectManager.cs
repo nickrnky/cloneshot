@@ -41,7 +41,13 @@ public enum SoundEffects
     Unstoppable,
     WelcomeToCloneShot,
     YouHaveLostTheLead,
-    YouHaveTakenTheLead
+    YouHaveTakenTheLead,
+	Music1,
+	Music2,
+	Music3,
+	Music4,
+	Music5,
+	Music6
 }
 
 public static class SoundEffectManager
@@ -164,7 +170,24 @@ public static class SoundEffectManager
                 case SoundEffects.YouHaveTakenTheLead:
                     newClip = Resources.Load<AudioClip>("Sound Effects/You have taken the lead");
                     break;
-                
+				case SoundEffects.Music1:
+					newClip = Resources.Load<AudioClip>("Sound Effects/Audio Adrenaline - Quake 3");
+					break;
+				case SoundEffects.Music2:
+					newClip = Resources.Load<AudioClip>("Sound Effects/Descent into Cerberon - Quake 2");
+					break;
+				case SoundEffects.Music3:
+					newClip = Resources.Load<AudioClip>("Sound Effects/Fuel My Game - Quake 3");
+					break;
+				case SoundEffects.Music4:
+					newClip = Resources.Load<AudioClip>("Sound Effects/Operation Overlord - Quake 2");
+					break;
+				case SoundEffects.Music5:
+					newClip = Resources.Load<AudioClip>("Sound Effects/Rocktronica - Quake 3");
+					break;
+				case SoundEffects.Music6:
+					newClip = Resources.Load<AudioClip>("Sound Effects/Tribulation - Quake 3");
+					break;
             }
         }
         catch(Exception e)

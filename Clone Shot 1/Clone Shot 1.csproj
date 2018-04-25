@@ -14,6 +14,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
@@ -253,9 +254,6 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
@@ -292,6 +290,7 @@
     <Compile Include="Assets\Scripts\CloneController.cs" />
     <Compile Include="Assets\Scripts\CloneShot Scripts\FPSInput.cs" />
     <Compile Include="Assets\Scripts\CloneShot Scripts\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\CloneShot Scripts\NetworkAnimationSync.cs" />
     <Compile Include="Assets\Scripts\CloneShot Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\CloneShot Scripts\PlayerSetup.cs" />
     <Compile Include="Assets\Scripts\Recording\PlayerActions\PlayerAction.cs" />

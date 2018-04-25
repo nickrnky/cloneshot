@@ -199,6 +199,10 @@ namespace Assets.Scripts
 
             clip = SoundEffectManager.GetClip(SoundEffects.Owww);
             
+            if(Audio == null)
+            {
+                Audio = GetComponent<AudioSource>();
+            }
             Audio.PlayOneShot(clip);
         }
 
@@ -216,6 +220,11 @@ namespace Assets.Scripts
                     clip = SoundEffectManager.GetClip(SoundEffects.MyLeg);
                     break;
 
+            }
+
+            if (Audio == null)
+            {
+                Audio = GetComponent<AudioSource>();
             }
             Audio.PlayOneShot(clip);
         }

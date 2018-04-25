@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterController))]
 [AddComponentMenu("Control Script/FPS Input")]
-public class FPSInput : MonoBehaviour {
+public class FPSInput : NetworkBehaviour
+{
 	public float speed = 6.0f;
 	public float gravity = -9.8f;
     public float jump_speed = 5.0f;
